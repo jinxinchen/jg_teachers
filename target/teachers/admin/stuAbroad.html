@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>研究生出国留学情况</title>
+
+    <link href="../common/Hplus-v.4.1.0/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="../common/Hplus-v.4.1.0/css/font-awesome.css?v=4.4.0" rel="stylesheet">
+    <!-- jqgrid-->
+    <link href="../common/Hplus-v.4.1.0/css/plugins/jqgrid/ui.jqgrid.css?0820" rel="stylesheet">
+
+    <link href="../common/Hplus-v.4.1.0/css/animate.css" rel="stylesheet">
+    <link href="../common/Hplus-v.4.1.0/css/style.css?v=4.1.0" rel="stylesheet">
+
+    <!--覆盖冲突样式-->
+    <link href="../css/H_PlushPatch.css" rel="stylesheet">
+
+    <style>
+        #tPostGraduateArticleList_firstName{
+            white-space: normal;
+        }
+        /*超出部分以...显示*/
+        .ui-jqgrid .ui-jqgrid-bdiv table.table-bordered td {
+            text-overflow : ellipsis;
+        }
+    </style>
+
+</head>
+
+<body class="gray-bg">
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-sm-12">
+            <!--<iframe hidden="hidden" name="hiddenIFrame"></iframe>-->
+
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>研究生出国留学情况</h5>
+                </div>
+                <div class="ibox-content">
+                    <div class="ibox ">
+                        <div class="ibox-content">
+                            <div class="tStuAbroade_wrapper">
+                                <table id="tStuAbroadList"></table>
+                                <div id="pagerTStuAbroadList"></div>
+                                <button type="button" class="btn btn-w-m btn-default" onclick="uploadStuAbroad()">下载</button>
+                                <button type="button" class="btn btn-w-m btn-default" onclick="inStuAbroad()">导入</button>
+                                <button type="button" class="btn btn-w-m btn-default" onclick="downStuAbroad()">模板下载</button>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+
+    <!--//上传文件悬浮框-->
+    <div class="modal inmodal fade" id="addFormModel" tabindex="-1" role="dialog" aria-hidden="false">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span
+                            class="sr-only">Close</span></button>
+                    <h4 class="modal-title" id="addFormTitle">添加文件</h4>
+                </div>
+                <!--<form action="" class="form-horizontal m-t" id="addForm" method="post" onsubmit=""-->
+                <!--target="hiddenIFrame" enctype="multipart/form-data">-->
+                <form action="" class="form-horizontal m-t" id="addForm" method="post" onsubmit=""
+                      enctype="multipart/form-data">
+                    <div class="modal-body" id="addFormContent">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-white" data-dismiss="modal">关闭</button>
+                        <button type="submit" class="btn btn-primary" id="addFormSaveBt" onclick="">保存</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- 全局js -->
+    <script src="../common/Hplus-v.4.1.0/js/jquery.min.js?v=2.1.4"></script>
+    <script src="../common/Hplus-v.4.1.0/js/bootstrap.min.js?v=3.3.6"></script>
+
+    <!-- jqGrid -->
+    <script src="../common/Hplus-v.4.1.0/js/plugins/jqgrid/i18n/grid.locale-cn.js?0820"></script>
+    <script src="../common/Hplus-v.4.1.0/js/plugins/jqgrid/jquery.jqGrid.min.js?0820"></script>
+
+    <!-- 自定义js -->
+    <script src="../common/Hplus-v.4.1.0/js/content.js?v=1.0.0"></script>
+
+    <!-- jQuery Validation plugin javascript-->
+    <script src="../common/Hplus-v.4.1.0/js/plugins/validate/jquery.validate.min.js"></script>
+    <script src="../common/Hplus-v.4.1.0/js/plugins/validate/messages_zh.min.js"></script>
+
+    <script src="../common/Hplus-v.4.1.0/js/demo/form-validate-demo.js"></script>
+
+    <!-- layerDate plugin javascript -->
+    <script src="../common/Hplus-v.4.1.0/js/plugins/layer/laydate/laydate.js"></script>
+
+    <script src="../common/Hplus-v.4.1.0/js/jquery-ui-1.10.4.min.js"></script>
+
+    <script src="../base.js"></script>
+    <script src="stuAbroad.js"></script>
+</body>
+
+</html>

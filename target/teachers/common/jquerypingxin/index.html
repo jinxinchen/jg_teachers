@@ -1,0 +1,33 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>jquery小星评级系统代码</title>
+<script type="text/javascript" src="js/jquery.js"></script>
+<link href="js/jq22.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<h2>
+  <script type="text/javascript" src="js/jq22.js"></script>
+  Demo1(input type is text)<br>
+  <br>
+  <input name="my_input" value="3" id="rating_simple1" type="text">
+  <br>
+  <br>
+  
+</h2>
+        <script language="javascript" type="text/javascript">
+            function test(value){
+                alert("This rating's value is "+value);
+            }
+            $(function() {
+                $("#rating_simple1").webwidget_rating_simple({
+                    rating_star_length: '6',
+                    rating_initial_value: '',
+                    rating_function_name: '',//this is function name for click
+                    directory: 'js/'
+                });
+            });
+        </script>
+</body>
+</html>

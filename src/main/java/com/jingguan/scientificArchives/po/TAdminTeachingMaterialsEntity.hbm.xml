@@ -1,0 +1,16 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="com.jingguan.scientificArchives.po.TAdminTeachingMaterialsEntity" table="t_admin_teaching_materials"
+           schema="jg_teachers">
+        <id name="id" column="id"/>
+        <property name="fileName" column="file_name"/>
+        <property name="fileSrc" column="file_src"/>
+        <property name="time" column="time"/>
+        <property name="name" column="name"/>
+        <property name="type" column="type"/>
+    </class>
+</hibernate-mapping>
