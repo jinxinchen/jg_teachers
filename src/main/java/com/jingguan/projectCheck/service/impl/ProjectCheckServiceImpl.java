@@ -70,7 +70,6 @@ public class ProjectCheckServiceImpl extends UserDao implements ProjectCheckServ
                 "项目类别",//等级
                 "立项时间",
                 "结束时间",
-
                 "是否在研",
                 "项目类型",
                 "资助经费",
@@ -80,6 +79,7 @@ public class ProjectCheckServiceImpl extends UserDao implements ProjectCheckServ
                 "负责人",
                 "成员名单",
         };
+        String[] fieldName ={};
 
         int cols=title.length;
 
