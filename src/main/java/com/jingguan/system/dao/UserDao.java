@@ -5,4 +5,5 @@ package com.jingguan.system.dao;
  */
 public interface UserDao {
     int findUserByAccount(String account, String password);
+    int findXgByAccount(String account, String password);
 }

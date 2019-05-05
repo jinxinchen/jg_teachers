@@ -57,6 +57,15 @@ function updateBaseInfo(){
     var updateUrl = "/teachers/baseInfo/updateBaseInfo.do"
     var formData = new FormData(document.getElementById("baseInfoForm"));
     console.log(formData)
+    if (!checkIdentity()) {
+        return;
+    }
+    if (!checkMail()) {
+        return;
+    }
+    if (!checkPhone()) {
+        return;
+    }
     $.ajax({
         type:'post',
         url: updateUrl,
@@ -66,10 +75,11 @@ function updateBaseInfo(){
         data: formData,
         // datatype:json,
         success:function(res){
-            console.log(234)
+            alert("更新成功");
             console.log(res)
         },
         error:function(e){
+            alert("更新失败");
             console.log(e)
         }
     })
@@ -89,10 +99,11 @@ function saveBaseInfo(){
         contentType: false,
         data: formdata,
         success:function(res){
-            console.log(1234)
+            alert("保存成功");
             console.log(res)
         },
         error:function(e){
+            alert("保存失败");
             console.log(e)
         }
     })
@@ -767,9 +778,11 @@ function savedegreeInfo(){
                 contentType: false,
                 // dataType: 'json',
                 success:function(data){
+                    alert("保存成功");
                     console.log(data)
                 },
                 error:function(e){
+                    alert("保存失败");
                     console.log(e)
                 }
             })
@@ -791,13 +804,15 @@ function updatedegreeInfo(){
         async:false,
         dataType: 'json',
         success:function (e) {
+            alert("更新成功");
             //console.log(e)
             //console.log(123)
         },
         error:function(e){
+            alert("更新失败");
             //console.log(e)
 
-            c//onsole.log(123+"wrong")
+            //onsole.log(123+"wrong")
         }
     })
 }
@@ -990,7 +1005,44 @@ function saveDegreeFile(degreeId) {
     })
 }
 
+//y验证邮箱
+function checkMail() {
+    var obj = document.getElementById("email").value;
+    if (obj.length == 0){
+        return true;
+    }
+    if(!obj.match(/^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+((\.[a-zA-Z0-9_-]{2,3}){1,2})$/)){
+        alert("请输入有效合法的邮箱地址！");
+        return false;
+    }
+    return true;
+}
 
+//验证身份证
+function checkIdentity() {
+    var obj = document.getElementById("identity").value;
+    if(obj.length == 0){
+        return true;
+    }
+    if(!obj.match(/(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/)){
+        alert("有效合法的身份证号码！");
+        return false;
+    }
+    return true;
+}
+
+//验证手机号
+function checkPhone(){
+    var phone = document.getElementById('tel').value;
+    if (phone.length == 0){
+        return true;
+    }
+    if(!(/^1(3|4|5|7|8)\d{9}$/.test(phone))){
+        alert("请输入有效合法的手机号码！");
+        return false;
+    }
+    return true;
+}
 $(function(){
     loadBaseInfo();
 	loadEduExp();

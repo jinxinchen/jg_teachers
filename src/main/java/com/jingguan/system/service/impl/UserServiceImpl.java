@@ -23,4 +23,14 @@ public class UserServiceImpl implements UserService{
             return 0;
         }
     }
+
+    @Override
+    public int XgLogin(String account, String password) {
+        int res = userDao.findXgByAccount(account,password);
+        if(res != 0){
+            return res;
+        }else{
+            return 0;
+        }
+    }
 }

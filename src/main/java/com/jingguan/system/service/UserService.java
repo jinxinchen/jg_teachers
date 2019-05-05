@@ -7,4 +7,5 @@ import org.springframework.stereotype.Service;
  */
 public interface UserService {
     int login(String account, String password);
+    int XgLogin(String account, String password);
 }

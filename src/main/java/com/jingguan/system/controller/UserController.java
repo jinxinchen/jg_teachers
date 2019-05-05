@@ -42,4 +42,17 @@ public class UserController {
         }
         return account;
     }
+
+    @RequestMapping("studentLogin")
+    @ResponseBody
+    public String getXgAccount(HttpServletRequest request, String account, String password){
+        int res = userService.XgLogin(account,password);
+        if(res != 0){
+            request.getSession().setAttribute("user_id",res);
+            return "success";
+        }else{
+            return "wrong";
+        }
+
+    }
 }
