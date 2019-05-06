@@ -491,6 +491,7 @@ function inSciencePrizeTemp1() {
 }
 
 $(function(){
+    if(!checkLogin()){ return;}
     loadReward();
 })
 

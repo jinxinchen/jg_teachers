@@ -441,5 +441,6 @@ function inActivityTemp() {
 }
 
 $(function(){
+    if(!checkLogin()){ return;}
     loadActivity();
 })

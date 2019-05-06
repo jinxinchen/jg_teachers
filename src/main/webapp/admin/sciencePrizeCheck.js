@@ -527,5 +527,6 @@ function downloadSciencePrize() {
 }
 
 $(function(){
+    if(!checkLogin()){ return;}
     loadActivity();
 })

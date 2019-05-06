@@ -392,5 +392,6 @@ function downloadActivity() {
 
 
 $(function(){
+    if(!checkLogin()){ return;}
     loadActivity();
 })

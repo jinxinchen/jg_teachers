@@ -482,5 +482,7 @@ function tran_value() {
     $("#fileName").val($("#fileSrc").val());
 }
 
-
-loadPostGraduteJingsai();
+$(function () {
+    if(!checkLogin()){ return;}
+    loadPostGraduteJingsai();
+})

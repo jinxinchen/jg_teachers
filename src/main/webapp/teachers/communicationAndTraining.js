@@ -547,6 +547,7 @@ function loadVisitingScholarExp(){
 }
 
 $(function(){
+    if(!checkLogin()){ return;}
 	loadCatExp();
 	loadVisitingScholarExp();
 })

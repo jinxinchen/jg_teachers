@@ -953,6 +953,7 @@ function downlScienceProject(){
 
 
 $(function(){
+    if(!checkLogin()){ return;}
     loadReward();
 })
 

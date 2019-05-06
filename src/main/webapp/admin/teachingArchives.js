@@ -299,5 +299,8 @@ function tran_value() {
     $("#fileName").val($("#fileSrc").val());
 }
 
+$(function () {
 
-loadTeachingMaterials();
+    if(!checkLogin()){ return;}
+    loadTeachingMaterials();
+})

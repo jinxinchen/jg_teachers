@@ -18,6 +18,17 @@ function loadAccount() {
     })
 }
 
+
+
+function loginOut() {
+    $.ajax({
+        type:"POST",
+        url:"system/user/loginOut.do",
+    });
+    window.location.href="/teachers/login.html";
+}
+
+
 //加载用户模块
 function loadModule() {
     $.ajax({
@@ -114,5 +125,12 @@ function sortModuleBySequence(modules) {
     }
     return modules;
 }
-loadAccount();
-loadModule();
+
+
+//为页面初始化提示模态框
+$(function () {
+    if(checkLogin()){
+        loadAccount();
+        loadModule();
+    }
+});

@@ -627,6 +627,7 @@ function downLoadFile(rowid,select){
 }
 
 $(function(){
+    if(!checkLogin()){ return;}
     loadMaterials();
     //loadDate()
 })

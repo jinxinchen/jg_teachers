@@ -398,4 +398,8 @@ function downloadAbilityProject() {
     window.location.href = "/teachers/fileTemplates/abilityProject_admin.xlsx";
 }
 
-loadAbilityProject()
+$(function () {
+    if(checkLogin()){
+        loadAbilityProject()
+    }
+});

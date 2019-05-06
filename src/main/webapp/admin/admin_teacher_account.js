@@ -462,5 +462,6 @@ function showDetail(id) {
 
 //初始化页面
 $(function () {
+    if(!checkLogin()){ return;}
     loadTeachers();
 })

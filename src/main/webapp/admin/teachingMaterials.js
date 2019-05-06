@@ -353,5 +353,7 @@ function tran_value() {
     $("#fileName").val($("#fileSrc").val());
 }
 
-
-loadTeachingMaterials();
+$(function () {
+    if(!checkLogin()){ return;}
+    loadTeachingMaterials();
+})

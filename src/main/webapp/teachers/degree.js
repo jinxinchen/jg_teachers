@@ -304,5 +304,7 @@ function downLoadMentorFile(){
 
 }
 
-
-load();
+$(function () {
+    if(!checkLogin()){ return;}
+    load();
+})

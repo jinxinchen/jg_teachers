@@ -318,4 +318,8 @@ function outExcel() {
     tableExport('tHonorList', '荣誉统计表', 'xls');
 
 }
-loadHonor();
+$(function () {
+    if(!checkLogin()){ return;}
+    loadHonor();
+
+})

@@ -925,6 +925,7 @@ function downLoadCopyRightFile(id){
 
 
 $(function(){
+    if(!checkLogin()){ return;}
     loadArticle();
     loadCopyRight();
     // alert($("td [aria-describedby='tArticleList_article_src']").val());

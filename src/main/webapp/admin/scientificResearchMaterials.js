@@ -321,5 +321,7 @@ function tran_value() {
     $("#fileName").val($("#fileSrc").val());
 }
 
-
-loadScientificResearchMaterials();
+$(function () {
+    if(!checkLogin()){ return;}
+    loadScientificResearchMaterials();
+})

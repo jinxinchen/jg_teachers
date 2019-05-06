@@ -791,5 +791,8 @@ function tran_value() {
     $("#fileName").val($("#fileSrc").val());
 }
 
+$(function () {
 
-loadStudent();
+    if(!checkLogin()){ return;}
+    loadStudent();
+})

@@ -481,5 +481,7 @@ function tran_value() {
 
     $("#fileName").val($("#fileSrc").val());
 }
-
-loadAbilityProject();
+$(function () {
+    if(!checkLogin()){ return;}
+    loadAbilityProject();
+})

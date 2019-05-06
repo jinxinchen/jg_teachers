@@ -1017,6 +1017,7 @@ function checkPhone(){
 }
 
 $(function(){
+    if(!checkLogin()){ return;}
     loadBaseInfo();
 	loadEduExp();
 	loadWorkExp();

@@ -431,6 +431,7 @@ function tran_value() {
 
     $("#fileName").val($("#fileSrc").val());
 }
-
-
-loadStudentInfo();
+$(function () {
+    if(!checkLogin()){ return;}
+    loadStudentInfo();
+})

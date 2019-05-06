@@ -1000,6 +1000,7 @@ function inProjectTemp() {
 // }
 
 $(function(){
+    if(!checkLogin()){ return;}
     loadReward();
 
 })

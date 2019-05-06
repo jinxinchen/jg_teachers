@@ -585,5 +585,8 @@ function tran_value() {
     $("#fileName").val($("#fileSrc").val());
 }
 
+$(function () {
 
-loadPostGraduteKeyan();
+    if(!checkLogin()){ return;}
+    loadPostGraduteKeyan();
+})

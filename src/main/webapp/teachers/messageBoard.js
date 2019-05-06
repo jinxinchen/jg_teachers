@@ -161,5 +161,6 @@ function loadMessage(){
 
 
 $(function(){
+    if(!checkLogin()){ return;}
     loadMessage();
 })

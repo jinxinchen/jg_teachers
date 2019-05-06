@@ -128,5 +128,6 @@ function loadMessageAdmin(){
 
 
 $(function(){
+    if(!checkLogin()){ return;}
     loadMessageAdmin();
 })

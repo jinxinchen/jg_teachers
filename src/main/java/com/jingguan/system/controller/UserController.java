@@ -18,6 +18,34 @@ public class UserController {
     @Resource(name="userService")
     private UserService userService;
 
+
+    /**
+     *  检查用户是不已经登陆了
+     * @param request 单独的request
+     * @return 结果
+     */
+    @RequestMapping("checkLogin")
+    @ResponseBody
+    public String checkLogin(HttpServletRequest request){
+        Object userId = request.getSession().getAttribute("user_id");
+        if(userId == null){
+            return "reject";
+        }else {
+            return "success";
+        }
+
+    }
+    /**
+     *  检查用户是不已经登陆了
+     * @param request 单独的request
+     */
+    @RequestMapping("loginOut")
+    @ResponseBody
+    public void loginOut(HttpServletRequest request){
+        request.getSession().setAttribute("user_id",null);
+    }
+
+
     @RequestMapping("login")
     @ResponseBody
     public String getUserAccount(HttpServletRequest request, String account, String password){

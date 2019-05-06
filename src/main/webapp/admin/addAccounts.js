@@ -308,5 +308,7 @@ function uploadRecordsByXls() {
 
 
 $(function () {
-    loadAccount();
+    if(checkLogin()){
+        loadAccount();
+    }
 })

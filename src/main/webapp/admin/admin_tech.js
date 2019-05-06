@@ -294,4 +294,7 @@ function uploadTech() {
         }
     });
 }
-loadTech()
+$(function () {
+    if(!checkLogin()){ return;}
+    loadTech()
+})
