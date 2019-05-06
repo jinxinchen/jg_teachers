@@ -183,4 +183,22 @@ public class VUserModulesEntity {
         result = 31 * result + (moduleStatus != null ? moduleStatus.hashCode() : 0);
         return result;
     }
+
+    @Override
+    public String toString() {
+        return "VUserModulesEntity{" +
+                "moduleId=" + moduleId +
+                ", user_id=" + user_id +
+                ", usersRoleId=" + usersRoleId +
+                ", roleModuleId=" + roleModuleId +
+                ", userAccount='" + userAccount + '\'' +
+                ", moduleName='" + moduleName + '\'' +
+                ", moduleFatherId=" + moduleFatherId +
+                ", moduleLevel=" + moduleLevel +
+                ", moduleSequence=" + moduleSequence +
+                ", moduleIsDefault=" + moduleIsDefault +
+                ", moduleUrl='" + moduleUrl + '\'' +
+                ", moduleStatus=" + moduleStatus +
+                '}';
+    }
 }

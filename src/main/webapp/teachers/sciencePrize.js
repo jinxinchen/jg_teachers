@@ -491,7 +491,7 @@ function inSciencePrizeTemp1() {
 }
 
 $(function(){
-    if(!checkLogin()){ return;}
+    if(!checkLogin("教学科研奖项")){ return;}
     loadReward();
 })
 

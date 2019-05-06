@@ -161,6 +161,6 @@ function loadMessage(){
 
 
 $(function(){
-    if(!checkLogin()){ return;}
+    if(!checkLogin("留言板")){ return;}
     loadMessage();
 })

@@ -354,6 +354,6 @@ function tran_value() {
 }
 
 $(function () {
-    if(!checkLogin()){ return;}
+    if(!checkLogin("教学材料")){ return;}
     loadTeachingMaterials();
 })

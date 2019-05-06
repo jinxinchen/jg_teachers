@@ -527,6 +527,6 @@ function downloadSciencePrize() {
 }
 
 $(function(){
-    if(!checkLogin()){ return;}
+    if(!checkLogin("教学科研奖项审核")){ return;}
     loadActivity();
 })

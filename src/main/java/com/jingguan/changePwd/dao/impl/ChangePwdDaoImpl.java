@@ -20,25 +20,29 @@ public class ChangePwdDaoImpl extends BaseDao implements ChangePwdDao {
 
         Session session = getCurrentSession();
         Transaction transaction = session.beginTransaction();
+        try {
+            //旧密码比较
+            List<TUsersEntity> user = session.createCriteria(TUsersEntity.class).add(Restrictions.eq("id",user_id)).list();
+            if(user.size()>0){
+                String pwd = user.get(0).getPassword().toString();
+                if(oldPassword.equals(pwd)){
+                    TUsersEntity tUsersEntity = session.load(TUsersEntity.class,user_id);
+                    tUsersEntity.setPassword(newPassword);
 
-        //旧密码比较
-        List<TUsersEntity> user = session.createCriteria(TUsersEntity.class).add(Restrictions.eq("id",user_id)).list();
-        if(user.size()>0){
-            String pwd = user.get(0).getPassword().toString();
-            if(oldPassword.equals(pwd)){
-                TUsersEntity tUsersEntity = session.load(TUsersEntity.class,user_id);
-                tUsersEntity.setPassword(newPassword);
+                    session.update(tUsersEntity);
 
-                session.update(tUsersEntity);
-                transaction.commit();
-                return 200;
+                    return 200;
+                }else{
+                    //与旧密码不符合
+                    return 0;
+                }
             }else{
-                //与旧密码不符合
-                return 0;
+                //修改密码失败
+                return 2001;
             }
-        }else{
-            //修改密码失败
-            return 2001;
+        }finally {
+            transaction.commit();
         }
+
     }
 }

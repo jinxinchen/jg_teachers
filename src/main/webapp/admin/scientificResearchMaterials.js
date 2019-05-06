@@ -322,6 +322,6 @@ function tran_value() {
 }
 
 $(function () {
-    if(!checkLogin()){ return;}
+    if(!checkLogin("科研材料")){ return;}
     loadScientificResearchMaterials();
 })

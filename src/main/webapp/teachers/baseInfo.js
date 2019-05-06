@@ -1017,7 +1017,7 @@ function checkPhone(){
 }
 
 $(function(){
-    if(!checkLogin()){ return;}
+    if(!checkLogin("基本信息")){ return;}
     loadBaseInfo();
 	loadEduExp();
 	loadWorkExp();

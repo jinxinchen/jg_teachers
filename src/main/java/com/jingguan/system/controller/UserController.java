@@ -1,5 +1,9 @@
 package com.jingguan.system.controller;
 
+import com.google.code.kaptcha.Constants;
+import com.jingguan.system.po.TUsersEntity;
+import com.jingguan.system.po.VUserModulesEntity;
+import com.jingguan.system.service.ModuleService;
 import com.jingguan.system.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -7,6 +11,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import java.util.List;
 
 /**
  * Created by 陈 on 2017/10/8.
@@ -17,6 +23,8 @@ public class UserController {
 
     @Resource(name="userService")
     private UserService userService;
+    @Resource(name = "moduleService")
+    private ModuleService moduleService;
 
 
     /**
@@ -26,17 +34,27 @@ public class UserController {
      */
     @RequestMapping("checkLogin")
     @ResponseBody
-    public String checkLogin(HttpServletRequest request){
+    public String checkLogin(HttpServletRequest request, VUserModulesEntity vUserModulesEntity){
         Object userId = request.getSession().getAttribute("user_id");
+        String result = "success";
         if(userId == null){
-            return "reject";
-        }else {
-            return "success";
-        }
+            result = "noLogin";
+        }else if(vUserModulesEntity.getModuleName() != null){
+            //不是null的话就是可以去需要分块的页面
+            result = "reject";
+            List<VUserModulesEntity> list = moduleService.listModuleByUserAccount(Integer.valueOf(userId.toString()));
+            for(VUserModulesEntity item:list){
+                if(item.getModuleName().equals(vUserModulesEntity.getModuleName())){
+                    result = "success";
+                    break;
+                }
+            }
 
+        }
+        return  result;
     }
     /**
-     *  检查用户是不已经登陆了
+     *  用户退出
      * @param request 单独的request
      */
     @RequestMapping("loginOut")
@@ -46,17 +64,46 @@ public class UserController {
     }
 
 
+
     @RequestMapping("login")
     @ResponseBody
-    public String getUserAccount(HttpServletRequest request, String account, String password){
-        int res = userService.login(account,password);
-        if(res != 0){
-            request.getSession().setAttribute("user_id",res);
-            return "success";
-        }else{
-            return "wrong";
+    public String getUserAccount(HttpServletRequest request, String account, String password,String code){
+        HttpSession httpSession = request.getSession();
+        //登陆次数
+       if(httpSession.getAttribute("loginTimes") == null){
+           httpSession.setAttribute("loginTimes",1);
+       }
+       Integer times = Integer.valueOf(httpSession.getAttribute("loginTimes").toString());
+       if(times>3){
+           //第四次没有成功登陆的情况需要堆其进行限制一分钟
+           if(httpSession.getAttribute("nextTime")==null){
+               httpSession.setAttribute("nextTime",System.currentTimeMillis()+60000);
+           }
+           long nextTime = Long.valueOf(httpSession.getAttribute("nextTime").toString());
+           if(nextTime > System.currentTimeMillis()){
+               return "timesLimit";
+           }else {
+               httpSession.setAttribute("nextTime",System.currentTimeMillis()+60000);
+           }
+       }
+        String meassage = "success";
+        String generateCode =(String) request.getSession().getAttribute(Constants.KAPTCHA_SESSION_KEY);
+        if(code == null || "".equals(code) || !code.equals(generateCode)){
+            meassage = "codeErro";
+        }else {
+            TUsersEntity res = userService.login(account);
+            if(res == null){
+                meassage = "noAccount";
+            } else if(!password.equals(res.getPassword())){
+                meassage = "passwordWorry";
+                httpSession.setAttribute("loginTimes",++times);
+            }
+            if("success".equals(meassage)){
+                request.getSession().setAttribute("user_id",res.getId());
+                httpSession.setAttribute("loginTimes",1);
+            }
         }
-
+        return meassage;
     }
 
     @RequestMapping(value = "account")

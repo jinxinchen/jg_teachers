@@ -399,7 +399,7 @@ function downloadAbilityProject() {
 }
 
 $(function () {
-    if(checkLogin()){
+    if(checkLogin("人才项目审核")){
         loadAbilityProject()
     }
 });

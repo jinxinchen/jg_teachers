@@ -305,6 +305,6 @@ function downLoadMentorFile(){
 }
 
 $(function () {
-    if(!checkLogin()){ return;}
+    if(!checkLogin("职位信息")){ return;}
     load();
 })

@@ -296,6 +296,6 @@ function tran_value() {
 
 $(function () {
 
-    if(!checkLogin()){ return;}
+    if(!checkLogin("学院档案")){ return;}
     loadTeachingMaterials();
 });

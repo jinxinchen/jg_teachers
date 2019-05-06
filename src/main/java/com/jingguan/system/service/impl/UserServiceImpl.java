@@ -1,6 +1,7 @@
 package com.jingguan.system.service.impl;
 
 import com.jingguan.system.dao.UserDao;
+import com.jingguan.system.po.TUsersEntity;
 import com.jingguan.system.service.UserService;
 import org.springframework.stereotype.Service;
 
@@ -15,13 +16,9 @@ public class UserServiceImpl implements UserService{
     private UserDao userDao;
 
     @Override
-    public int login(String account, String password) {
-        int res = userDao.findUserByAccount(account,password);
-        if(res != 0){
-            return res;
-        }else{
-            return 0;
-        }
+    public TUsersEntity login(String account) {
+        return userDao.findUserByAccount(account);
+
     }
 
     @Override

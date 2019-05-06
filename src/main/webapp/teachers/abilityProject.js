@@ -482,6 +482,6 @@ function tran_value() {
     $("#fileName").val($("#fileSrc").val());
 }
 $(function () {
-    if(!checkLogin()){ return;}
+    if(!checkLogin("人才项目")){ return;}
     loadAbilityProject();
 })

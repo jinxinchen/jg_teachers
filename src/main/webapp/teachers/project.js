@@ -1000,7 +1000,7 @@ function inProjectTemp() {
 // }
 
 $(function(){
-    if(!checkLogin()){ return;}
+    if(!checkLogin("教学科研项目")){ return;}
     loadReward();
 
 })

@@ -392,6 +392,6 @@ function downloadActivity() {
 
 
 $(function(){
-    if(!checkLogin()){ return;}
+    if(!checkLogin("研修经历审核")){ return;}
     loadActivity();
 })

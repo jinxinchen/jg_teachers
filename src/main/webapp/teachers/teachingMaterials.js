@@ -627,7 +627,7 @@ function downLoadFile(rowid,select){
 }
 
 $(function(){
-    if(!checkLogin()){ return;}
+    if(!checkLogin("教学资料")){ return;}
     loadMaterials();
     //loadDate()
 })

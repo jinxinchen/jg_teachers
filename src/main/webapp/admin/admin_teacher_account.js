@@ -462,6 +462,6 @@ function showDetail(id) {
 
 //初始化页面
 $(function () {
-    if(!checkLogin()){ return;}
+    if(!checkLogin("教师管理")){ return;}
     loadTeachers();
 })
