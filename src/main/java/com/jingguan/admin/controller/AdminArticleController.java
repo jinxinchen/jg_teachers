@@ -259,38 +259,40 @@ public class AdminArticleController extends test2{
 
         UserDao userDao=new UserDao();
         int user_id=userDao.findUserIdByTname(vAdminArticleEntity.getUname());
-        TArticleEntity tArticleEntity=new TArticleEntity();
-
-
-
-        tArticleEntity.setType(vAdminArticleEntity.getType());
-
-        tArticleEntity.setArticleName(vAdminArticleEntity.getArticleName());
-
-        tArticleEntity.setPostTime(vAdminArticleEntity.getPostTime());
-
-        tArticleEntity.setPublicationName(vAdminArticleEntity.getPublicationName());
-
-        tArticleEntity.setPublicationLevel(vAdminArticleEntity.getPublicationLevel());
-
-        tArticleEntity.setPublicationId(vAdminArticleEntity.getPublicationId());
-
-        tArticleEntity.setNums(vAdminArticleEntity.getNums());
-
-        tArticleEntity.setPeriods(vAdminArticleEntity.getPeriods());
-
-        tArticleEntity.setLevel(vAdminArticleEntity.getLevel());
-
-        tArticleEntity.setIsCall(vAdminArticleEntity.getIsCall());
-
-        tArticleEntity.setNotice(vAdminArticleEntity.getNotice());
-        articleService.addArticle(user_id,tArticleEntity);
-        int res=200; //= articleService.editArticle(userId,tArticleEntity);
-        if(res == 200){
-            return 200;
-        }else{
+        if (user_id == 0){
             return 0;
+        }else {
+            TArticleEntity tArticleEntity=new TArticleEntity();
+            tArticleEntity.setType(vAdminArticleEntity.getType());
+
+            tArticleEntity.setArticleName(vAdminArticleEntity.getArticleName());
+
+            tArticleEntity.setPostTime(vAdminArticleEntity.getPostTime());
+
+            tArticleEntity.setPublicationName(vAdminArticleEntity.getPublicationName());
+
+            tArticleEntity.setPublicationLevel(vAdminArticleEntity.getPublicationLevel());
+
+            tArticleEntity.setPublicationId(vAdminArticleEntity.getPublicationId());
+
+            tArticleEntity.setNums(vAdminArticleEntity.getNums());
+
+            tArticleEntity.setPeriods(vAdminArticleEntity.getPeriods());
+
+            tArticleEntity.setLevel(vAdminArticleEntity.getLevel());
+
+            tArticleEntity.setIsCall(vAdminArticleEntity.getIsCall());
+
+            tArticleEntity.setNotice(vAdminArticleEntity.getNotice());
+            articleService.addArticle(user_id,tArticleEntity);
+            int res=200; //= articleService.editArticle(userId,tArticleEntity);
+            if(res == 200){
+                return 200;
+            }else{
+                return 0;
+            }
         }
+
     }
 
     @RequestMapping("addCopyRight")

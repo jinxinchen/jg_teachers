@@ -43,9 +43,6 @@ function loadAbilityProject(){
                 index: 'prizeId',
                 search: true,
                 editable: true,
-                editrules: {
-                    required: true
-                },
                 width: 150,
                 sortable: true,
                 searchoptions: {
@@ -60,9 +57,6 @@ function loadAbilityProject(){
                 index: 'prizeName',
                 search: true,
                 editable: true,
-                editrules: {
-                    required: true
-                },
                 width: 150,
                 sortable: true,
                 searchoptions: {
@@ -77,9 +71,6 @@ function loadAbilityProject(){
                 index: 'prizeLevel',
                 search: true,
                 editable: true,
-                editrules: {
-                    required: true
-                },
                 width: 150,
                 sortable: true,
                 searchoptions: {
@@ -96,18 +87,12 @@ function loadAbilityProject(){
                 width: 150,
                 sortable: true,
                 editable: true,
-                editrules: {
-                    required: true
-                },
             },
             {
                 name: 'winner',
                 index: 'winner',
                 width: 90,
                 editable: true,
-                editrules: {
-                    required: true
-                },
                 search: true,
                 sortable: true,
                 searchoptions: {
@@ -120,18 +105,27 @@ function loadAbilityProject(){
             {
                 name: 'winTime',
                 index: 'winTime',
-                width: 90,
-                editable: true,
-                editrules: {
-                    required: true
+                editable:true,width:200,sorttype:"date",formatter:"date",
+                editoptions: {
+                    dataInit: function (element) {
+                        $(element).attr("readonly", "readonly");
+                        $(element).on("click", function () {
+                            laydate({istime: false, format: 'YYYY-MM-DD', choose: function(dates){ //选择好日期的回调
+                                    $(element).trigger("change");
+                                }})
+                        })
+                    }
                 },
-                search: true,
-                sortable: true,
                 searchoptions: {
-                    sopt: ['eq', 'ne', 'lt', 'le', 'gt']
-                },
-                searchrules: {
-                    required: true
+                    sopt: ['eq', 'ne', 'lt', 'le', 'gt'],
+                    dataInit: function (element) {
+                        $(element).attr("readonly", "readonly");
+                        $(element).on("click", function () {
+                            laydate({istime: false, format: 'YYYY-MM-DD', choose: function(dates){ //选择好日期的回调
+                                    $(element).trigger("change");
+                                }})
+                        })
+                    }
                 }
             },
             {
@@ -139,9 +133,6 @@ function loadAbilityProject(){
                 index: 'funds',
                 width: 90,
                 editable: true,
-                editrules: {
-                    required: true
-                },
                 search: true,
                 sortable: true,
                 searchoptions: {
@@ -169,9 +160,6 @@ function loadAbilityProject(){
                 index: 'notice',
                 width: 90,
                 editable: true,
-                editrules: {
-                    required: true
-                },
                 search: true,
                 sortable: true,
                 searchoptions: {

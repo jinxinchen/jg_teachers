@@ -161,7 +161,6 @@ function loadAccount() {
             console.log(response)
             var result = response.responseJSON;
             if(result == 201){
-                alert(123)
                 showNotice("该账户已存在！");
             }
             var errorText = response.responseJSON.data;

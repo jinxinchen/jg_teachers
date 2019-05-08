@@ -4,7 +4,7 @@
 
 
 var loadDataUrl =  "/teachers/admin/sciencePrize/listPrizeRecord.do";
-var updateUrl ="/teachers/teacher/sciencePrize/updatePrizeRecord.do";
+var updateUrl ="/teachers/admin/sciencePrize/updatePrizeRecord.do";
 
 function passArticle(id) {
     // alert(id);
@@ -139,9 +139,6 @@ function loadActivity(){
                 sortable: true,
                 editable: true,
                 hidden: false,
-                editrules: {
-                    required: true
-                },
                 searchoptions: {
                     sopt: ['eq', 'ne','cn','nc']
                 },
@@ -156,9 +153,6 @@ function loadActivity(){
                 width:150,
                 editable: true,
                 sortable: false,
-                editrules: {
-                    required: true
-                },
                 searchoptions: {
                     sopt: ['eq', 'ne','cn','nc']
                 },
@@ -173,9 +167,6 @@ function loadActivity(){
                 width:150,
                 editable: true,
                 sortable: false,
-                editrules: {
-                    required: true
-                },
                 searchoptions: {
                     sopt: ['eq', 'ne','cn','nc']
                 },
@@ -210,21 +201,25 @@ function loadActivity(){
             {
                 name:'prizeTime',
                 index:'prizeTime',
-                width:150,
-                formatter: 'date',
-                formatoptions: {srcformat: 'Y-m-d H:i:s', newformat: 'Y-m-d'},
-                editable: true,
-                width: 150,
-                search: true,
-                sortable: true,
+                editable:true,width:200,sorttype:"date",formatter:"date",
+                editoptions: {
+                    dataInit: function (element) {
+                        $(element).attr("readonly", "readonly");
+                        $(element).on("click", function () {
+                            laydate({istime: false, format: 'YYYY-MM-DD', choose: function(dates){ //选择好日期的回调
+                                    $(element).trigger("change");
+                                }})
+                        })
+                    }
+                },
                 searchoptions: {
                     sopt: ['eq', 'ne', 'lt', 'le', 'gt'],
                     dataInit: function (element) {
                         $(element).attr("readonly", "readonly");
                         $(element).on("click", function () {
-                            laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss', choose: function(dates){ //选择好日期的回调
-                                $(element).trigger("change");
-                            }})
+                            laydate({istime: false, format: 'YYYY-MM-DD', choose: function(dates){ //选择好日期的回调
+                                    $(element).trigger("change");
+                                }})
                         })
                     }
                 }
@@ -235,9 +230,6 @@ function loadActivity(){
                 width:150,
                 editable: true,
                 sortable: false,
-                editrules: {
-                    required: true
-                },
                 searchoptions: {
                     sopt: ['eq', 'ne','cn','nc']
                 },
@@ -251,9 +243,6 @@ function loadActivity(){
                 width:150,
                 editable: true,
                 sortable: true,
-                editrules: {
-                    required: true
-                },
                 searchoptions: {
                     sopt: ['eq', 'ne','cn','nc']
                 },
@@ -267,9 +256,6 @@ function loadActivity(){
                 width:150,
                 editable: true,
                 sortable: true,
-                editrules: {
-                    required: true
-                },
                 searchoptions: {
                     sopt: ['eq', 'ne','cn','nc']
                 },
@@ -284,9 +270,6 @@ function loadActivity(){
                 width:150,
                 editable: true,
                 sortable: true,
-                editrules: {
-                    required: true
-                },
                 searchoptions: {
                     sopt: ['eq', 'ne','cn','nc']
                 },
@@ -317,9 +300,6 @@ function loadActivity(){
                 width:150,
                 editable: true,
                 sortable: true,
-                editrules: {
-                    required: true
-                },
                 searchoptions: {
                     sopt: ['eq', 'ne','cn','nc']
                 },

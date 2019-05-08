@@ -180,21 +180,25 @@ function loadReward() {
             {
                 name:'createTime',
                 index:'createTime',
-                width:150,
-                formatter: 'date',
-                formatoptions: {srcformat: 'Y-m-d H:i:s', newformat: 'Y-m-d'},
-                editable: true,
-                width: 150,
-                search: true,
-                sortable: true,
+                editable:true,width:200,sorttype:"date",formatter:"date",
+                editoptions: {
+                    dataInit: function (element) {
+                        $(element).attr("readonly", "readonly");
+                        $(element).on("click", function () {
+                            laydate({istime: false, format: 'YYYY-MM-DD', choose: function(dates){ //选择好日期的回调
+                                    $(element).trigger("change");
+                                }})
+                        })
+                    }
+                },
                 searchoptions: {
                     sopt: ['eq', 'ne', 'lt', 'le', 'gt'],
                     dataInit: function (element) {
                         $(element).attr("readonly", "readonly");
                         $(element).on("click", function () {
-                            laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss', choose: function(dates){ //选择好日期的回调
-                                $(element).trigger("change");
-                            }})
+                            laydate({istime: false, format: 'YYYY-MM-DD', choose: function(dates){ //选择好日期的回调
+                                    $(element).trigger("change");
+                                }})
                         })
                     }
                 }
@@ -202,21 +206,25 @@ function loadReward() {
             {
                 name:'endTime',
                 index:'endTime',
-                width:150,
-                formatter: 'date',
-                formatoptions: {srcformat: 'Y-m-d H:i:s', newformat: 'Y-m-d'},
-                editable: true,
-                width: 150,
-                search: true,
-                sortable: true,
+                editable:true,width:200,sorttype:"date",formatter:"date",
+                editoptions: {
+                    dataInit: function (element) {
+                        $(element).attr("readonly", "readonly");
+                        $(element).on("click", function () {
+                            laydate({istime: false, format: 'YYYY-MM-DD', choose: function(dates){ //选择好日期的回调
+                                    $(element).trigger("change");
+                                }})
+                        })
+                    }
+                },
                 searchoptions: {
                     sopt: ['eq', 'ne', 'lt', 'le', 'gt'],
                     dataInit: function (element) {
                         $(element).attr("readonly", "readonly");
                         $(element).on("click", function () {
-                            laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss', choose: function(dates){ //选择好日期的回调
-                                $(element).trigger("change");
-                            }})
+                            laydate({istime: false, format: 'YYYY-MM-DD', choose: function(dates){ //选择好日期的回调
+                                    $(element).trigger("change");
+                                }})
                         })
                     }
                 }
@@ -444,7 +452,7 @@ function loadReward() {
             closeAfterAdd: true,
             afterSubmit : function(response, postdata) {
                 var result = response.responseJSON.success;
-                return [result,'save failed！',postdata.id];
+                return [result,'立项时间要比结束时间早',postdata.id];
             }
         },
         {

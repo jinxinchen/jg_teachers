@@ -107,10 +107,17 @@ public class ManageDaoImpl extends BaseDao implements ManageDao {
     @Override
     public void updateDegree(TEducateDegreeEntity tEducateDegreeEntity,TTeacherBaseinfoUpdate tTeacherBaseinfoUpdate) {
         Session session = getCurrentSession();
+        Transaction transaction = session.beginTransaction();
         session.beginTransaction();
-        session.update(tTeacherBaseinfoUpdate);
-        session.saveOrUpdate(tEducateDegreeEntity);
-        session.getTransaction().commit();
+        try{
+            session.update(tTeacherBaseinfoUpdate);
+            session.saveOrUpdate(tEducateDegreeEntity);
+            transaction.commit();
+        }catch (Exception e){
+            transaction.rollback();
+        }
+
+
     }
 
     @Override

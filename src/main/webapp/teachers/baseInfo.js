@@ -59,15 +59,14 @@ function downLoadFileDegree(downloadUrl){
 function updateBaseInfo(){
     var updateUrl = "/teachers/baseInfo/updateBaseInfo.do"
     var formData = new FormData(document.getElementById("baseInfoForm"));
-    console.log(JSON.stringify(formData));
     if (!checkIdentity()) {
-        return;
+        formData.set("identity","");
     }
     if (!checkMail()) {
-        return;
+        formData.set("email","");
     }
     if (!checkPhone()) {
-        return;
+        formData.set("tel ","");
     }
     $.ajax({
         type:'post',
@@ -1009,11 +1008,18 @@ function checkPhone(){
     if (phone.length == 0){
         return true;
     }
-    if(!(/^1(3|4|5|7|8)\d{9}$/.test(phone))){
-        alert("请输入有效合法的手机号码！");
-        return false;
+    //匹配规则 17859733736 +86-0-17750021669  0595-2269888  099-12345678
+    phontest =/^(\+\d{2}-)?(\d{1,3}-)?([1][3,4,5,7,8]\d{9})$/;//|(\d{4}-\d{7})|(\d{3}-\d{8})$/;
+    //固定电话匹配
+    phone1 = /^(\d{4}-)\d{7}$/;
+    phone2 = /^(\d{3}-)\d{8}$/;
+    //是不是联系电话,是不电话号码
+    if(phontest.test(phone) || phone1.test(phone) || phone2.test(phone)){
+        return true;
+    }else {
+        alert("请输入有效合法的电话\n普通电话为11位\n港澳地区电话格式位 +xx-x-xxxxx\n固定电话格式为 xxx-xxxx！");
     }
-    return true;
+    return false;
 }
 
 $(function(){

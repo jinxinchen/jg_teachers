@@ -21,6 +21,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.net.URLEncoder;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -150,42 +153,48 @@ public class ProjectController {
                                         String endScientificEvidenceSrc,
                                         String endUpdateTime,
                                         String others,
-                                        String status){
+                                        String status)throws ParseException {
 
         ResponseWrapper wrapper=new ResponseWrapper();
         wrapper.setSuccess(false);
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        if (sdf.parse(createTime).getTime() < sdf.parse(endTime).getTime()){
+            //封装成class
+            TScientificEntity record=new TScientificEntity();
+            record.setUserId(Integer.valueOf(userId));
+            record.setHeadName(headName);
+            record.setProjectId(projectId);
+            record.setStatus(status);
+            record.setId(Integer.valueOf(id.trim()));
+            record.setScientificName(scientificName);
+            record.setScientificSource(scientificSource);
+            record.setLevel(level);
+            record.setCreateTime(createTime);
+            record.setEndTime(endTime);
+            record.setIsMarch(isMarch);
+            record.setType(type);
+            record.setMemberList(memberList);
+            record.setGrants(grants.trim());
+            record.setCreateScientificEvidenceSrc(createScientificEvidenceSrc);
+            record.setCreateUpdateTime(createUpdateTime);
+            record.setCreateScientificEvidenceSrc(endScientificEvidenceSrc);
+            record.setEndUpdateTime(endUpdateTime);
+            record.setOthers(others);
 
-        //封装成class
-        TScientificEntity record=new TScientificEntity();
-        record.setUserId(Integer.valueOf(userId));
-        record.setHeadName(headName);
-        record.setProjectId(projectId);
-        record.setStatus(status);
-        record.setId(Integer.valueOf(id.trim()));
-        record.setScientificName(scientificName);
-        record.setScientificSource(scientificSource);
-        record.setLevel(level);
-        record.setCreateTime(createTime);
-        record.setEndTime(endTime);
-        record.setIsMarch(isMarch);
-        record.setType(type);
-        record.setMemberList(memberList);
-        record.setGrants(grants.trim());
-        record.setCreateScientificEvidenceSrc(createScientificEvidenceSrc);
-        record.setCreateUpdateTime(createUpdateTime);
-        record.setCreateScientificEvidenceSrc(endScientificEvidenceSrc);
-        record.setEndUpdateTime(endUpdateTime);
-        record.setOthers(others);
 
+            try{
+                projectService.updateRecord(record);
+                wrapper.setSuccess(true);
+            }catch (Exception ex){
+                ex.printStackTrace();
+            }
 
-        try{
-            projectService.updateRecord(record);
-            wrapper.setSuccess(true);
-        }catch (Exception ex){
-            ex.printStackTrace();
+            return wrapper;
+        }else {
+            return wrapper;
         }
 
-        return wrapper;
+
     }
 
 
@@ -209,46 +218,52 @@ public class ProjectController {
                                       String endScientificEvidenceSrc,
                                       String endUpdateTime,
                                       String others
-                                     ){
+                                     )throws ParseException {
         ResponseWrapper wrapper=new ResponseWrapper();
         wrapper.setSuccess(false);
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        if (sdf.parse(createTime).getTime() < sdf.parse(endTime).getTime()){
+            //封装成class
+            TScientificEntity record=new TScientificEntity();
+            record.setScientificName(scientificName);
+            record.setScientificSource(scientificSource);
+            record.setProjectId(projectId);
+            record.setLevel(level);
+            record.setCreateTime(createTime);
+            record.setEndTime(endTime);
+            record.setIsMarch(isMarch);
+            record.setType(type);
+            record.setMemberList(memberList);
+            record.setGrants(grants.trim());
+            record.setCreateScientificEvidenceSrc(createScientificEvidenceSrc);
+            record.setCreateUpdateTime(createUpdateTime);
+            record.setCreateScientificEvidenceSrc(endScientificEvidenceSrc);
+            record.setEndUpdateTime(endUpdateTime);
+            record.setOthers(others);
 
-        //封装成class
-        TScientificEntity record=new TScientificEntity();
-        record.setScientificName(scientificName);
-        record.setScientificSource(scientificSource);
-        record.setProjectId(projectId);
-        record.setLevel(level);
-        record.setCreateTime(createTime);
-        record.setEndTime(endTime);
-        record.setIsMarch(isMarch);
-        record.setType(type);
-        record.setMemberList(memberList);
-        record.setGrants(grants.trim());
-        record.setCreateScientificEvidenceSrc(createScientificEvidenceSrc);
-        record.setCreateUpdateTime(createUpdateTime);
-        record.setCreateScientificEvidenceSrc(endScientificEvidenceSrc);
-        record.setEndUpdateTime(endUpdateTime);
-        record.setOthers(others);
+            try{
+                String user_id="";
+                if(headName==null||"".equals(headName)){
+                    user_id =  request.getSession().getAttribute("user_id").toString();;
+                    headName = userIdDao.getNameByUserId(user_id.trim());
+                }else {
+                    UserDao userDao=new UserDao();
+                    user_id+=userDao.findUserIdByTname(headName);
+                }
 
-        try{
-            String user_id="";
-            if(headName==null||"".equals(headName)){
-                user_id =  request.getSession().getAttribute("user_id").toString();;
-                headName = userIdDao.getNameByUserId(user_id.trim());
-            }else {
-                UserDao userDao=new UserDao();
-                user_id+=userDao.findUserIdByTname(headName);
+                record.setUserId(Integer.valueOf(user_id.trim()));
+                record.setHeadName(headName);
+                projectService.saveRecord(user_id,record);
+                wrapper.setSuccess(true);
+            }catch (Exception ex){
+                ex.printStackTrace();
             }
-
-            record.setUserId(Integer.valueOf(user_id.trim()));
-            record.setHeadName(headName);
-            projectService.saveRecord(user_id,record);
-            wrapper.setSuccess(true);
-        }catch (Exception ex){
-            ex.printStackTrace();
+            return wrapper;
+        }else {
+            return wrapper;
         }
-        return wrapper;
+
+
     }
     @RequestMapping(value = "inProject",method = RequestMethod.POST)
     @ResponseBody

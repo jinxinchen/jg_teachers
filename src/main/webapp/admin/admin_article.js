@@ -151,9 +151,6 @@ function loadArticle(){
                 index: 'type',
                 search: true,
                 editable: true,
-                editrules: {
-                    required: true
-                },
                 width: 90,
                 edittype: 'select',
                 editoptions: {
@@ -180,9 +177,6 @@ function loadArticle(){
                 index: 'articleName',
                 search: true,
                 editable: true,
-                editrules: {
-                    required: true
-                },
                 width: 150,
                 sortable: true,
                 searchoptions: {
@@ -225,9 +219,6 @@ function loadArticle(){
                 width: 150,
                 sortable: true,
                 editable: true,
-                editrules: {
-                    required: true
-                },
                 searchoptions: {
                     sopt: ['eq', 'ne','cn','nc']
                 },
@@ -241,10 +232,6 @@ function loadArticle(){
                 width: 130,
                 // stype: 'integer',
                 editable: true,
-                editrules: {
-                    required: true,
-                    // integer: true
-                },
                 edittype: 'select',
                 editoptions: {
                     dataUrl: '',
@@ -273,10 +260,6 @@ function loadArticle(){
                 width: 130,
                 // stype: 'integer',
                 editable: true,
-                editrules: {
-                    required: true,
-                    // integer: true
-                },
                 search: true,
                 sortable: true,
                 searchoptions: {
@@ -292,10 +275,6 @@ function loadArticle(){
                 width:120,
                 stype: 'integer',
                 editable: true,
-                editrules: {
-                    required: true,
-                    integer: true
-                },
                 search: true,
                 sortable: true,
                 searchoptions: {
@@ -312,10 +291,6 @@ function loadArticle(){
                 width:120,
                 stype: 'integer',
                 editable: true,
-                editrules: {
-                    required: true,
-                    integer: true
-                },
                 search: true,
                 sortable: true,
                 searchoptions: {
@@ -346,10 +321,6 @@ function loadArticle(){
                 width: 120,
                 // stype: 'integer',
                 editable: true,
-                editrules: {
-                    required: true,
-                    // integer: true
-                },
                 search: true,
                 sortable: true,
                 searchoptions: {
@@ -378,10 +349,6 @@ function loadArticle(){
                 width: 120,
                 // stype: 'integer',
                 editable: true,
-                editrules: {
-                    required: true,
-                    // integer: true
-                },
                 search: true,
                 sortable: true,
                 searchoptions: {
@@ -531,9 +498,6 @@ function loadCopyRight(){
                 index: 'ownerName',
                 search: true,
                 editable: true,
-                editrules: {
-                    required: true
-                },
                 width: 150,
                 sortable: true,
                 searchoptions: {
@@ -547,9 +511,6 @@ function loadCopyRight(){
                 name: 'title',
                 index: 'title',
                 editable: true,
-                editrules: {
-                    required: true
-                },
                 search: true,
                 width: 150,
                 sortable: true,
@@ -564,9 +525,6 @@ function loadCopyRight(){
                 name: 'issbn',
                 index: 'issbn',
                 editable: true,
-                editrules: {
-                    required: true
-                },
                 search: true,
                 width: 150,
                 sortable: true,
@@ -584,9 +542,6 @@ function loadCopyRight(){
                 width: 150,
                 sortable: true,
                 editable: true,
-                editrules: {
-                    required: true
-                },
                 searchoptions: {
                     sopt: ['eq', 'ne','cn','nc']
                 },
@@ -599,9 +554,6 @@ function loadCopyRight(){
                 index: 'publishName',
                 width: 90,
                 editable: true,
-                editrules: {
-                    required: true
-                },
                 search: true,
                 sortable: true,
                 searchoptions: {
@@ -614,18 +566,27 @@ function loadCopyRight(){
             {
                 name: 'publishTime',
                 index: 'publishTime',
-                width: 90,
-                editable: true,
-                editrules: {
-                    required: true
+                editable:true,width:200,sorttype:"date",formatter:"date",
+                editoptions: {
+                    dataInit: function (element) {
+                        $(element).attr("readonly", "readonly");
+                        $(element).on("click", function () {
+                            laydate({istime: false, format: 'YYYY-MM-DD', choose: function(dates){ //选择好日期的回调
+                                    $(element).trigger("change");
+                                }})
+                        })
+                    }
                 },
-                search: true,
-                sortable: true,
                 searchoptions: {
-                    sopt: ['eq', 'ne', 'lt', 'le', 'gt']
-                },
-                searchrules: {
-                    required: true
+                    sopt: ['eq', 'ne', 'lt', 'le', 'gt'],
+                    dataInit: function (element) {
+                        $(element).attr("readonly", "readonly");
+                        $(element).on("click", function () {
+                            laydate({istime: false, format: 'YYYY-MM-DD', choose: function(dates){ //选择好日期的回调
+                                    $(element).trigger("change");
+                                }})
+                        })
+                    }
                 }
             },
             {
@@ -633,9 +594,6 @@ function loadCopyRight(){
                 index: 'publishId',
                 width: 90,
                 editable: true,
-                editrules: {
-                    required: true
-                },
                 search: true,
                 sortable: true,
                 searchoptions: {
@@ -650,9 +608,6 @@ function loadCopyRight(){
                 index: 'otherParticipator',
                 width: 90,
                 editable: true,
-                editrules: {
-                    required: true
-                },
                 search: true,
                 sortable: true,
                 searchoptions: {
@@ -680,9 +635,6 @@ function loadCopyRight(){
                 index: 'notice',
                 width: 90,
                 editable: true,
-                editrules: {
-                    required: true
-                },
                 search: true,
                 sortable: true,
                 searchoptions: {
@@ -753,6 +705,7 @@ function loadCopyRight(){
             },
             closeAfterAdd: true,
             afterSubmit : function(response, postdata) {
+                console.log(response);
                 var result = response.responseJSON.success;
                 return [result,'save failed！',postdata.id];
             }
