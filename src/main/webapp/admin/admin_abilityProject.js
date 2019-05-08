@@ -386,4 +386,8 @@ function downloadAbilityProject() {
     window.location.href = "/teachers/fileTemplates/abilityProject_admin.xlsx";
 }
 
-loadAbilityProject()
+$(function () {
+    if(checkLogin("人才项目审核")){
+        loadAbilityProject()
+    }
+});

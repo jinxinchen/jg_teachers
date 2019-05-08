@@ -264,5 +264,6 @@ function loadAbroadExp(){
 }
 
 $(function(){
+    if(!checkLogin()){ return;}
 	loadAbroadExp();
 })

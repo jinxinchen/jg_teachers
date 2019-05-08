@@ -1023,6 +1023,7 @@ function checkPhone(){
 }
 
 $(function(){
+    if(!checkLogin("基本信息")){ return;}
     loadBaseInfo();
 	loadEduExp();
 	loadWorkExp();

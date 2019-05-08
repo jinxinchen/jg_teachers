@@ -307,5 +307,7 @@ function uploadRecordsByXls() {
 
 
 $(function () {
-    loadAccount();
+    if(checkLogin("添加账户")){
+        loadAccount();
+    }
 })

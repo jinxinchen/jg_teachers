@@ -321,5 +321,7 @@ function tran_value() {
     $("#fileName").val($("#fileSrc").val());
 }
 
-
-loadScientificResearchMaterials();
+$(function () {
+    if(!checkLogin("科研材料")){ return;}
+    loadScientificResearchMaterials();
+})

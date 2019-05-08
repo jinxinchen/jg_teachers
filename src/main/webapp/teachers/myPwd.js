@@ -1,6 +1,11 @@
 
 function updatePwd() {
     var updatePwdUrl = "/teachers/changePwd/updatePwd.do";
+
+    if($("#newPassword").val().length<6){
+        $("#modalContent").html("密码长度最少6位"); $('#noticeModal').modal('toggle');
+        return false;
+    }
     if($("#newPassword").val() != $("#newPassword1").val()){
         $("#modalContent").html("两次密码不一致");
         $('#noticeModal').modal('toggle');

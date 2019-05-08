@@ -603,5 +603,7 @@ function tran_value() {
     $("#fileName").val($("#fileSrc").val());
 }
 
-
-loadPostGraduteArticle();
+$(function () {
+    if(!checkLogin()){ return;}
+    loadPostGraduteArticle();
+})

@@ -961,6 +961,7 @@ function downlScienceProject(){
 
 
 $(function(){
+    if(!checkLogin("教学科研项目审核")){ return;}
     loadReward();
 })
 

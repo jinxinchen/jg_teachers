@@ -353,5 +353,7 @@ function tran_value() {
     $("#fileName").val($("#fileSrc").val());
 }
 
-
-loadTeachingMaterials();
+$(function () {
+    if(!checkLogin("教学材料")){ return;}
+    loadTeachingMaterials();
+})

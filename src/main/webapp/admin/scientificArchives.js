@@ -294,5 +294,7 @@ function tran_value() {
     $("#fileName").val($("#fileSrc").val());
 }
 
-
-loadTeachingMaterials();
+$(function () {
+    if(!checkLogin("科研档案")){ return;}
+    loadTeachingMaterials();
+})

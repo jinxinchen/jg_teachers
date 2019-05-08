@@ -128,5 +128,6 @@ function loadMessageAdmin(){
 
 
 $(function(){
+    if(!checkLogin("留言板")){ return;}
     loadMessageAdmin();
 })

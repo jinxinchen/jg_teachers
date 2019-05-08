@@ -981,6 +981,7 @@ function downLoadCopyRightFile(id){
 }
 
 $(function(){
+    if(!checkLogin("论文和著作")){ return;}
     loadArticle();
     loadCopyRight();
     // alert($("td [aria-describedby='tArticleList_article_src']").val());

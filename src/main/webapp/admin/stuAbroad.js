@@ -538,6 +538,7 @@ function downLoadIssbnFile(id){
 }
 function tran_value() {
 
+    if(!checkLogin()){ return;}
     $("#fileName").val($("#fileSrc").val());
 }
 

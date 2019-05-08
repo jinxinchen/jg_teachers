@@ -128,7 +128,6 @@ public class EduServiceImpl implements EduService {
                 tEducationExperienceEntity.setAbroad(list.get(i)[5]);
                 tEducationExperienceEntity.setUserId(user_id);
                 tEducationExperienceEntity.setStatus(1);
-
                 eduDao.inEdu(tEducationExperienceEntity);
             }
 

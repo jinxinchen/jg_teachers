@@ -441,5 +441,6 @@ function inActivityTemp() {
 }
 
 $(function(){
+    if(!checkLogin("研修经历")){ return;}
     loadActivity();
 })

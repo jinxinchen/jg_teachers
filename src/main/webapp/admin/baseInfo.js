@@ -1044,6 +1044,7 @@ function checkPhone(){
     return true;
 }
 $(function(){
+    if(!checkLogin()){ return;}
     loadBaseInfo();
 	loadEduExp();
 	loadWorkExp();
