@@ -675,7 +675,7 @@ function loadMembers(rowid) {
             restoreAfterError: true,
             afterSubmit : function(response, postdata) {
                 var result = response.responseJSON.success;
-                return [result,'fail to update！',postdata.id];
+                return [result,response.responseJSON.data,postdata.id];
             },
             closeAfterEdit: true,
             extraparam: {

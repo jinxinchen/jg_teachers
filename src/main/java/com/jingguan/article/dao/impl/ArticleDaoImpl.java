@@ -54,7 +54,7 @@ public class ArticleDaoImpl extends BaseDao implements ArticleDao {
         TArticleEntity tArticleEntity1 = session.load(TArticleEntity.class,tArticleEntity.getId());
 
         try {
-            //tArticleEntity.setUserId(user_id);
+            tArticleEntity.setUserId(user_id);
             MergeTool.mergeObject(tArticleEntity,tArticleEntity1);
             session.update(tArticleEntity1);
             transaction.commit();

@@ -290,11 +290,9 @@ function loadArticle(){
                 name: 'nums',
                 index: 'nums',
                 width:120,
-                stype: 'integer',
                 editable: true,
                 editrules: {
                     required: true,
-                    integer: true
                 },
                 search: true,
                 sortable: true,
@@ -349,6 +347,17 @@ function loadArticle(){
                 editrules: {
                     required: true,
                     // integer: true
+                },
+                edittype: 'select',
+                editoptions: {
+                    dataUrl: '',
+                    buildSelect: function (responseData) {
+                        var selectHtml = '<select><option></option>';
+                        selectHtml += '<option value="是">' + "是" + '</option>';
+                        selectHtml += '<option value="否">' + "否" + '</option>';
+                        selectHtml += '</select>';
+                        return selectHtml;
+                    }
                 },
                 search: true,
                 sortable: true,
@@ -434,9 +443,9 @@ function loadArticle(){
         editCaption: "edit",
         restoreAfterError: true,
         afterSubmit : function(response, postdata) {
-            console.log(response)
+            console.log(response);
             var result = response.responseJSON.success;
-            return [result,'fail to update！',postdata.id];
+            return [result,response.responseJSON.data,postdata.id];
         },
         closeAfterEdit: true,
         extraparam: {
@@ -451,8 +460,9 @@ function loadArticle(){
         },
         closeAfterAdd: true,
         afterSubmit : function(response, postdata) {
+            console.log(response);
             var result = response.responseJSON.success;
-            return [result,'save failed！',postdata.id];
+            return [result,response.responseJSON.data,postdata.id];
         }
     },{
         //delete按钮选项
@@ -587,6 +597,19 @@ function loadCopyRight(){
                 editrules: {
                     required: true
                 },
+                edittype: 'select',
+                editoptions: {
+                    dataUrl: '',
+                    buildSelect: function (responseData) {
+                        var selectHtml = '<select><option></option>';
+                        selectHtml += '<option value="专著">' + "专著" + '</option>';
+                        selectHtml += '<option value="教材">' + "教材" + '</option>';
+                        selectHtml += '<option value="译著">' + "译著" + '</option>';
+                        selectHtml += '<option value="其他">' + "其他" + '</option>';
+                        selectHtml += '</select>';
+                        return selectHtml;
+                    }
+                },
                 searchoptions: {
                     sopt: ['eq', 'ne','cn','nc']
                 },
@@ -621,6 +644,16 @@ function loadCopyRight(){
                 },
                 search: true,
                 sortable: true,
+                editoptions: {
+                    dataInit: function (element) {
+                        $(element).attr("readonly", "readonly");
+                        $(element).on("click", function () {
+                            laydate({istime: false, format: 'YYYY-MM-DD', choose: function(dates){ //选择好日期的回调
+                                    $(element).trigger("change");
+                                }})
+                        })
+                    }
+                },
                 searchoptions: {
                     sopt: ['eq', 'ne', 'lt', 'le', 'gt']
                 },
@@ -736,9 +769,8 @@ function loadCopyRight(){
             editCaption: "edit",
             restoreAfterError: true,
             afterSubmit : function(response, postdata) {
-                console.log(response)
                 var result = response.responseJSON.success;
-                return [result,'fail to update！',postdata.id];
+                return [result,response.responseJSON.data,postdata.id];
             },
             closeAfterEdit: true,
             extraparam: {
@@ -754,7 +786,7 @@ function loadCopyRight(){
             closeAfterAdd: true,
             afterSubmit : function(response, postdata) {
                 var result = response.responseJSON.success;
-                return [result,'save failed！',postdata.id];
+                return [result,response.responseJSON.data,postdata.id];
             }
         }, {
             //delete按钮选项

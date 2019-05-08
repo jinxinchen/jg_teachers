@@ -2,6 +2,7 @@ package com.jingguan.sciencePrizeCheck.dao.impl;
 
 import com.jingguan.common.dao.impl.BaseDao;
 import com.jingguan.common.vo.Page;
+import com.jingguan.sciencePrize.po.TEducateScientificEntity;
 import com.jingguan.sciencePrizeCheck.dao.VTeachersPrizeCheckEntityDao;
 import com.jingguan.sciencePrizeCheck.po.TChangeStatus;
 import com.jingguan.sciencePrizeCheck.po.VTeachersPrizeCheckEntity;
@@ -25,13 +26,10 @@ public class VTeacherPrizeCheckEntityDaoImpl extends BaseDao implements VTeacher
     }
 
     @Override
-    public void update(int id, String status) {
+    public void update(TEducateScientificEntity tEducateScientificEntity) {
         Session session=getCurrentSession();
         Transaction transaction=session.beginTransaction();
-        TChangeStatus tChangeStatus=new TChangeStatus();
-        tChangeStatus.setId(id);
-        tChangeStatus.setStatus(status);
-        session.update(tChangeStatus);
+        session.update(tEducateScientificEntity);
         transaction.commit();
     }
 

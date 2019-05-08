@@ -4,7 +4,7 @@
 
 
 var loadDataUrl =  "/teachers/admin/sciencePrize/listPrizeRecord.do";
-var updateUrl ="/teachers/teacher/sciencePrize/updatePrizeRecord.do";
+var updateUrl ="/teachers/admin/sciencePrize/updatePrizeRecord.do";
 
 function passArticle(id) {
     // alert(id);
@@ -214,6 +214,16 @@ function loadActivity(){
                 formatter: 'date',
                 formatoptions: {srcformat: 'Y-m-d H:i:s', newformat: 'Y-m-d'},
                 editable: true,
+                editoptions: {
+                    dataInit: function (element) {
+                        $(element).attr("readonly", "readonly");
+                        $(element).on("click", function () {
+                            laydate({istime: false, format: 'YYYY-MM-DD', choose: function(dates){ //选择好日期的回调
+                                    $(element).trigger("change");
+                                }})
+                        })
+                    }
+                },
                 width: 150,
                 search: true,
                 sortable: true,
@@ -375,7 +385,7 @@ function loadActivity(){
              restoreAfterError: true,
              afterSubmit : function(response, postdata) {
                  var result = response.responseJSON.success;
-                 return [result,'fail to update！',postdata.id];
+                 return [result,response.responseJSON.data,postdata.id];
              },
              closeAfterEdit: true,
              extraparam: {
@@ -392,7 +402,7 @@ function loadActivity(){
             closeAfterAdd: true,
             afterSubmit : function(response, postdata) {
                 var result = response.responseJSON.success;
-                return [result,'save failed！',postdata.id];
+                return [result,response.responseJSON.data,postdata.id];
             }
         },
         {

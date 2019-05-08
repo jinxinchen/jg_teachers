@@ -157,7 +157,14 @@ public class ProjectController {
 
         //封装成class
         TScientificEntity record=new TScientificEntity();
-        record.setUserId(Integer.valueOf(userId));
+
+        UserDao userDao = new UserDao();
+        Integer user_id = userDao.findUserIdByTname(headName);
+        if(user_id == null){
+            wrapper.setData("不存在教师"+headName);
+            return wrapper;
+        }
+        record.setUserId(user_id);
         record.setHeadName(headName);
         record.setProjectId(projectId);
         record.setStatus(status);
@@ -182,6 +189,7 @@ public class ProjectController {
             projectService.updateRecord(record);
             wrapper.setSuccess(true);
         }catch (Exception ex){
+            wrapper.setData("服务器内部错我，更新失败");
             ex.printStackTrace();
         }
 
@@ -210,7 +218,7 @@ public class ProjectController {
                                       String endUpdateTime,
                                       String others
                                      ){
-        ResponseWrapper wrapper=new ResponseWrapper();
+        ResponseWrapper<String> wrapper=new ResponseWrapper<>();
         wrapper.setSuccess(false);
 
         //封装成class
@@ -232,20 +240,24 @@ public class ProjectController {
         record.setOthers(others);
 
         try{
-            String user_id="";
+            Integer user_id;
             if(headName==null||"".equals(headName)){
-                user_id =  request.getSession().getAttribute("user_id").toString();;
-                headName = userIdDao.getNameByUserId(user_id.trim());
+                user_id = (Integer) request.getSession().getAttribute("user_id");;
+                headName = userIdDao.getNameByUserId(user_id.toString());
             }else {
                 UserDao userDao=new UserDao();
-                user_id+=userDao.findUserIdByTname(headName);
+                user_id=userDao.findUserIdByTname(headName);
             }
-
-            record.setUserId(Integer.valueOf(user_id.trim()));
-            record.setHeadName(headName);
-            projectService.saveRecord(user_id,record);
-            wrapper.setSuccess(true);
+            if(user_id ==null){
+                wrapper.setData("不存在教师"+headName);
+            }else {
+                record.setUserId(Integer.valueOf(user_id.toString()));
+                record.setHeadName(headName);
+                projectService.saveRecord(user_id.toString(), record);
+                wrapper.setSuccess(true);
+            }
         }catch (Exception ex){
+            wrapper.setData("系统内部出现错误，更新失败");
             ex.printStackTrace();
         }
         return wrapper;

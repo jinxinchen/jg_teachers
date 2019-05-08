@@ -8,6 +8,7 @@ import com.jingguan.article.po.TArticleEntity;
 import com.jingguan.article.service.ArticleService;
 import com.jingguan.common.dao.impl.UserDao;
 import com.jingguan.common.vo.Page;
+import com.jingguan.common.vo.ResponseWrapper;
 import com.jingguan.copyRight.po.TCopyrightEntity;
 import com.jingguan.copyRight.service.CopyRightService;
 import com.jingguan.uploadExcel.controller.test2;
@@ -214,11 +215,17 @@ public class AdminArticleController extends test2{
 
     @RequestMapping("editArticle")
     @ResponseBody
-    int editArticle(VAdminArticleEntity vAdminArticleEntity){
+    ResponseWrapper editArticle(VAdminArticleEntity vAdminArticleEntity){
+        ResponseWrapper<String> responseWrapper = new ResponseWrapper<String>();
+        responseWrapper.setSuccess(false);
         UserDao userDao=new UserDao();
-        int user_id=userDao.findUserIdByTname(vAdminArticleEntity.getUname());
+        Integer user_id=userDao.findUserIdByTname(vAdminArticleEntity.getUname());
+        //201是指当前数据里面没有这教师
+        if(user_id == null){
+            responseWrapper.setData("不存在此教师，请检查仔细再修改");
+            return responseWrapper;
+        }
         TArticleEntity tArticleEntity=new TArticleEntity();
-
 
         tArticleEntity.setId(vAdminArticleEntity.getId());
         tArticleEntity.setUserId(vAdminArticleEntity.getUserId());
@@ -246,22 +253,28 @@ public class AdminArticleController extends test2{
         tArticleEntity.setNotice(vAdminArticleEntity.getNotice());
         int res = articleService.editArticle(user_id,tArticleEntity);
         if(res == 200){
-            return 200;
+            responseWrapper.setSuccess(true);
         }else{
-            return 0;
+            responseWrapper.setData("更新失败,服务器内部原因");
         }
+        return responseWrapper;
     }
 
 
     @RequestMapping("addArticle")
     @ResponseBody
-    int addArticle(VAdminArticleEntity vAdminArticleEntity){
+    ResponseWrapper addArticle(VAdminArticleEntity vAdminArticleEntity){
+        ResponseWrapper<String> responseWrapper = new ResponseWrapper<String>();
+        responseWrapper.setSuccess(false);
 
         UserDao userDao=new UserDao();
-        int user_id=userDao.findUserIdByTname(vAdminArticleEntity.getUname());
+        Integer user_id=userDao.findUserIdByTname(vAdminArticleEntity.getUname());
+        if(user_id == null){
+            responseWrapper.setData("教师"+vAdminArticleEntity.getUname()+"不存在");
+            return responseWrapper;
+        }
+
         TArticleEntity tArticleEntity=new TArticleEntity();
-
-
 
         tArticleEntity.setType(vAdminArticleEntity.getType());
 
@@ -284,21 +297,26 @@ public class AdminArticleController extends test2{
         tArticleEntity.setIsCall(vAdminArticleEntity.getIsCall());
 
         tArticleEntity.setNotice(vAdminArticleEntity.getNotice());
-        articleService.addArticle(user_id,tArticleEntity);
-        int res=200; //= articleService.editArticle(userId,tArticleEntity);
+        int res=articleService.addArticle(user_id,tArticleEntity);
         if(res == 200){
-            return 200;
+            responseWrapper.setSuccess(true);
         }else{
-            return 0;
+            responseWrapper.setData("更新失败,服务器内部原因");
         }
+        return responseWrapper;
     }
 
     @RequestMapping("addCopyRight")
     @ResponseBody
-    int addCopyRight(VAdminCopyrightEntity vAdminCopyrightEntity){
-
+    ResponseWrapper addCopyRight(VAdminCopyrightEntity vAdminCopyrightEntity){
+        ResponseWrapper<String> responseWrapper = new ResponseWrapper<String>();
+        responseWrapper.setSuccess(false);
         UserDao userDao=new UserDao();
-        int user_id=userDao.findUserIdByTname(vAdminCopyrightEntity.getName());
+        Integer user_id=userDao.findUserIdByTname(vAdminCopyrightEntity.getOwnerName());
+        if(user_id == null){
+            responseWrapper.setData("不存在此教师，请检查仔细再修改");
+            return responseWrapper;
+        }
 
         TCopyrightEntity tCopyrightEntity=new TCopyrightEntity();
         //name: 1
@@ -323,23 +341,28 @@ public class AdminArticleController extends test2{
         tCopyrightEntity.setNotice(vAdminCopyrightEntity.getNotice());
         //oper: add
         //id:
-        copyRightService.addCopyRight(user_id,tCopyrightEntity);
-        int res=200; //= articleService.editArticle(userId,tArticleEntity);
+
+        int res=copyRightService.addCopyRight(user_id,tCopyrightEntity);
         if(res == 200){
-            return 200;
+            responseWrapper.setSuccess(true);
         }else{
-            return 0;
+            responseWrapper.setData("更新失败,服务器内部原因");
         }
+        return responseWrapper;
     }
 
     @RequestMapping("editCopyRight")
     @ResponseBody
-    int editCopyRight(VAdminCopyrightEntity vAdminCopyrightEntity){
-
+    ResponseWrapper editCopyRight(VAdminCopyrightEntity vAdminCopyrightEntity){
+        ResponseWrapper<String> responseWrapper = new ResponseWrapper<String>();
+        responseWrapper.setSuccess(false);
         UserDao userDao=new UserDao();
-
-        int user_id=userDao.findUserIdByTname(vAdminCopyrightEntity.getName());
-
+        Integer user_id=userDao.findUserIdByTname(vAdminCopyrightEntity.getOwnerName());
+        //201是指当前数据里面没有这教师
+        if(user_id == null){
+            responseWrapper.setData("不存在此教师，请检查仔细再修改");
+            return responseWrapper;
+        }
         TCopyrightEntity tCopyrightEntity=new TCopyrightEntity();
         //name: 1
 
@@ -368,12 +391,12 @@ public class AdminArticleController extends test2{
         tCopyrightEntity.setNotice(vAdminCopyrightEntity.getNotice());
         //oper: add
 
-        copyRightService.editCopyRight(user_id,tCopyrightEntity);
-        int res=200; //= articleService.editArticle(userId,tArticleEntity);
+        int res=copyRightService.editCopyRight(user_id,tCopyrightEntity); //= articleService.editArticle(userId,tArticleEntity);
         if(res == 200){
-            return 200;
+            responseWrapper.setSuccess(true);
         }else{
-            return 0;
+            responseWrapper.setData("更新失败,服务器内部原因");
         }
+        return responseWrapper;
     }
 }

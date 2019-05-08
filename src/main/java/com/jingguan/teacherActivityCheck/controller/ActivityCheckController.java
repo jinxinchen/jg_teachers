@@ -1,9 +1,12 @@
 package com.jingguan.teacherActivityCheck.controller;
 
+import com.jingguan.common.dao.impl.UserDao;
+import com.jingguan.common.tool.MergeTool;
 import com.jingguan.common.vo.Page;
 import com.jingguan.common.vo.ResponseWrapper;
 import com.jingguan.teacherActivity.po.TTeacherActivityEntity;
 import com.jingguan.teacherActivity.service.TeacherActivityService;
+import com.jingguan.teacherActivityCheck.po.VTeachersActivityCheckEntity;
 import com.jingguan.teacherActivityCheck.service.ActivityCheckService;
 import com.jingguan.uploadExcel.controller.test2;
 import jxl.write.WriteException;
@@ -59,13 +62,23 @@ public class ActivityCheckController extends test2 {
 
     @RequestMapping(value="updateActivity")
     @ResponseBody
-    public ResponseWrapper updateRecord(TTeacherActivityEntity tTeacherActivityEntity){
-
-        ResponseWrapper wrapper=new ResponseWrapper();
+    public ResponseWrapper updateRecord(VTeachersActivityCheckEntity tTeacherActivityEntity){
+        ResponseWrapper<String> wrapper=new ResponseWrapper<String>();
         wrapper.setSuccess(false);
+        TTeacherActivityEntity updateObject = new TTeacherActivityEntity();
+        MergeTool.mergeObject(tTeacherActivityEntity,updateObject);
+        UserDao userDao=new UserDao();
+        Integer userId = userDao.findUserIdByTname(tTeacherActivityEntity.getTeacherName());
+        if(userId == null){
+            wrapper.setData("不存在这个教师"+tTeacherActivityEntity.getTeacherName());
+            return wrapper;
+        }else {
+            updateObject.setUserId(userId);
+        }
+        System.out.println(updateObject);
+
         try {
-            //activityCheckService.updateRecord(id,status);
-            teacherActivityService.updateRecord(tTeacherActivityEntity);
+            teacherActivityService.updateRecord(updateObject);
             wrapper.setSuccess(true);
         }catch (Exception ex){
             ex.printStackTrace();

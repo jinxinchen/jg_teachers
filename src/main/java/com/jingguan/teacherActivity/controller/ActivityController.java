@@ -133,15 +133,19 @@ public class ActivityController extends UploadImages {
         record.setOthers(others);
 
         try{
-            int userid=-1;
+            Integer userid;
             if(teacherName!=null||"".equals(teacherName)){
                 UserDao userDao=new UserDao();
                 userid=userDao.findUserIdByTname(teacherName);
             }else {
-                userid = (int) request.getSession().getAttribute("user_id");
+                userid = (Integer) request.getSession().getAttribute("user_id");
             }
-            teacherActivityService.saveRecord(userid,record);
-            wrapper.setSuccess(true);
+            if(userid == null){
+                wrapper.setData("用户不存在");
+            }else {
+                teacherActivityService.saveRecord(userid,record);
+                wrapper.setSuccess(true);
+            }
         }catch (Exception ex){
             ex.printStackTrace();
         }
