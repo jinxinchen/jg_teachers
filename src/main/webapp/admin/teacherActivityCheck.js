@@ -4,7 +4,7 @@
 
 
 var loadDataUrl =  "/teachers/admin/teacherActivity/listActivity.do";
-var updateUrl = "/teachers/teacher/teacherActivity/updateActivity.do";
+var updateUrl = "/teachers/admin/teacherActivity/updateActivity.do";
 var deleteUrl="/teachers/teacher/teacherActivity/deleteActivity.do";
 var saveUrl="/teachers/teacher/teacherActivity/saveActivity.do";
 
@@ -129,7 +129,13 @@ function loadActivity(){
             {
                 name:'activityTime',
                 index:'activityTime',
-                editable:true,width:200,sorttype:"date",formatter:"date",
+                width:150,
+                formatter: 'date',
+                formatoptions: {srcformat: 'Y-m-d H:i:s', newformat: 'Y-m-d'},
+                editable:true,
+                width: 150,
+                search: true,
+                sortable: true,
                 editoptions: {
                     dataInit: function (element) {
                         $(element).attr("readonly", "readonly");
@@ -232,9 +238,8 @@ function loadActivity(){
         editCaption: "edit",
         restoreAfterError: true,
         afterSubmit : function(response, postdata) {
-            console.log(response);
             var result = response.responseJSON.success;
-            return [result,'fail to update！',postdata.id];
+            return [result,response.responseJSON.data,postdata.id];
         },
         closeAfterEdit: true,
         extraparam: {
@@ -250,7 +255,7 @@ function loadActivity(){
         closeAfterAdd: true,
         afterSubmit : function(response, postdata) {
             var result = response.responseJSON.success;
-            return [result,'save failed！',postdata.id];
+            return [result,response.responseJSON.data,postdata.id];
         }
     },{
         //delete按钮选项

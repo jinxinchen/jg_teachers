@@ -212,9 +212,8 @@ function loadAbilityProject(){
         editCaption: "edit",
         restoreAfterError: true,
         afterSubmit : function(response, postdata) {
-            console.log(response)
             var result = response.responseJSON.success;
-            return [result,'fail to update！',postdata.id];
+            return [result,response.responseJSON.data,postdata.id];
         },
         closeAfterEdit: true,
         extraparam: {
@@ -230,7 +229,7 @@ function loadAbilityProject(){
         closeAfterAdd: true,
         afterSubmit : function(response, postdata) {
             var result = response.responseJSON.success;
-            return [result,'save failed！',postdata.id];
+            return [result,response.responseJSON.data,postdata.id];
         }
     }, {
         //delete按钮选项

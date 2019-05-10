@@ -20,29 +20,30 @@ import java.util.List;
 public class UserDaoImpl extends BaseDao implements UserDao {
 
     @Override
-    public TUsersEntity findUserByAccount(String account) {
+    public int findUserByAccount(String account,String password) {
        //开启会话
-        Session session = getCurrentSession();
+        Session session = this.getCurrentSession();
         Transaction trans = session.beginTransaction();
-        List<TUsersEntity> user = session.createCriteria(TUsersEntity.class).add(Restrictions.eq("account",account)).list();
+
+        List<TUsersEntity> user = session.createCriteria(TUsersEntity.class).add(Restrictions.eq("account",account)).add(Restrictions.eq("password",password)).list();
         trans.commit();
         if(user.size() > 0){
-            return user.get(0);
+            return user.get(0).getId();
         }else{
-            return null;
+            return 0;
         }
     }
 
     @Override
     public int findXgByAccount(String account, String password) {
         //开启会话
-        Session session = getCurrentSession();
+        Session session = this.getCurrentSession();
         Transaction trans = session.beginTransaction();
 
         List<TUsersEntity> user = session.createCriteria(TUsersEntity.class).add(Restrictions.eq("account",account)).add(Restrictions.eq("password",password)).list();
         trans.commit();
         if(user.size() > 0){
-            Session session1 = getCurrentSession();
+            Session session1 = this.getCurrentSession();
             Transaction trans1 = session1.beginTransaction();
             List<TUsersRoleEntity> userRole = session1.createCriteria(TUsersRoleEntity.class).add(Restrictions.eq("userId",user.get(0).getId())).list();
             trans1.commit();

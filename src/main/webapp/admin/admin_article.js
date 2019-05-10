@@ -273,7 +273,6 @@ function loadArticle(){
                 name: 'nums',
                 index: 'nums',
                 width:120,
-                stype: 'integer',
                 editable: true,
                 search: true,
                 sortable: true,
@@ -321,6 +320,17 @@ function loadArticle(){
                 width: 120,
                 // stype: 'integer',
                 editable: true,
+                edittype: 'select',
+                editoptions: {
+                    dataUrl: '',
+                    buildSelect: function (responseData) {
+                        var selectHtml = '<select><option></option>';
+                        selectHtml += '<option value="是">' + "是" + '</option>';
+                        selectHtml += '<option value="否">' + "否" + '</option>';
+                        selectHtml += '</select>';
+                        return selectHtml;
+                    }
+                },
                 search: true,
                 sortable: true,
                 searchoptions: {
@@ -401,9 +411,9 @@ function loadArticle(){
         editCaption: "edit",
         restoreAfterError: true,
         afterSubmit : function(response, postdata) {
-            console.log(response)
+            console.log(response);
             var result = response.responseJSON.success;
-            return [result,'fail to update！',postdata.id];
+            return [result,response.responseJSON.data,postdata.id];
         },
         closeAfterEdit: true,
         extraparam: {
@@ -418,8 +428,9 @@ function loadArticle(){
         },
         closeAfterAdd: true,
         afterSubmit : function(response, postdata) {
+            console.log(response);
             var result = response.responseJSON.success;
-            return [result,'save failed！',postdata.id];
+            return [result,response.responseJSON.data,postdata.id];
         }
     },{
         //delete按钮选项
@@ -542,6 +553,19 @@ function loadCopyRight(){
                 width: 150,
                 sortable: true,
                 editable: true,
+                edittype: 'select',
+                editoptions: {
+                    dataUrl: '',
+                    buildSelect: function (responseData) {
+                        var selectHtml = '<select><option></option>';
+                        selectHtml += '<option value="专著">' + "专著" + '</option>';
+                        selectHtml += '<option value="教材">' + "教材" + '</option>';
+                        selectHtml += '<option value="译著">' + "译著" + '</option>';
+                        selectHtml += '<option value="其他">' + "其他" + '</option>';
+                        selectHtml += '</select>';
+                        return selectHtml;
+                    }
+                },
                 searchoptions: {
                     sopt: ['eq', 'ne','cn','nc']
                 },
@@ -688,9 +712,8 @@ function loadCopyRight(){
             editCaption: "edit",
             restoreAfterError: true,
             afterSubmit : function(response, postdata) {
-                console.log(response)
                 var result = response.responseJSON.success;
-                return [result,'fail to update！',postdata.id];
+                return [result,response.responseJSON.data,postdata.id];
             },
             closeAfterEdit: true,
             extraparam: {
@@ -707,7 +730,7 @@ function loadCopyRight(){
             afterSubmit : function(response, postdata) {
                 console.log(response);
                 var result = response.responseJSON.success;
-                return [result,'save failed！',postdata.id];
+                return [result,response.responseJSON.data,postdata.id];
             }
         }, {
             //delete按钮选项

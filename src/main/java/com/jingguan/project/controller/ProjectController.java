@@ -153,7 +153,7 @@ public class ProjectController {
                                         String endScientificEvidenceSrc,
                                         String endUpdateTime,
                                         String others,
-                                        String status)throws ParseException {
+                                        String status)throws ParseException{
 
         ResponseWrapper wrapper=new ResponseWrapper();
         wrapper.setSuccess(false);
@@ -190,10 +190,9 @@ public class ProjectController {
             }
 
             return wrapper;
-        }else {
+        }else{
             return wrapper;
         }
-
 
     }
 
