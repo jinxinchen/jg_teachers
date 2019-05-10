@@ -123,7 +123,7 @@ function loadActivity(){
                 index:'name',
                 witdth:150,
                 editable:true,
-                sotrable:false,
+                sortable:true,
                 searchoptions: {
                     sopt: ['eq', 'ne','cn','nc']
                 },

@@ -181,17 +181,27 @@ function loadArticle(){
             {
                 name: 'isCall',
                 index: 'isCall',
-                width: 90,
+                width: 120,
                 // stype: 'integer',
                 editable: true,
+                edittype: 'select',
+                editoptions: {
+                    dataUrl: '',
+                    buildSelect: function (responseData) {
+                        var selectHtml = '<select><option></option>';
+                        selectHtml += '<option value="是">' + "是" + '</option>';
+                        selectHtml += '<option value="否">' + "否" + '</option>';
+                        selectHtml += '</select>';
+                        return selectHtml;
+                    }
+                },
                 search: true,
                 sortable: true,
                 searchoptions: {
-                    sopt: ['eq', 'ne', 'lt', 'le', 'gt']
+                    sopt: ['eq', 'ne','cn','nc']
                 },
                 searchrules: {
-                    required: true,
-                    // integer: true
+                    // required: true
                 }
             },
             {

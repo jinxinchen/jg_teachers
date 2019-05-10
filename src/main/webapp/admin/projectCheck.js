@@ -128,7 +128,7 @@ function loadReward() {
                 index:'scientificName',
                 width:150,
                 editable: true,
-                sortable: false,
+                sortable: true,
                 searchoptions: {
                     sopt: ['eq', 'ne','cn','nc']
                 },
@@ -142,7 +142,7 @@ function loadReward() {
                 index:'scientificSource',//po层class是关键字没办法用class故变成clazz了
                 width:150,
                 editable: true,
-                sortable: false,
+                sortable: true,
                 searchoptions: {
                     sopt: ['eq', 'ne','cn','nc']
                 },
@@ -155,7 +155,7 @@ function loadReward() {
                 index:'level',
                 width:150,
                 editable: true,
-                sortable: false,
+                sortable: true,
                 edittype: 'select',
                 editoptions: {
                     dataUrl: '',
@@ -234,7 +234,7 @@ function loadReward() {
                 index:'isMarch',
                 width:150,
                 editable: true,
-                sortable: false,
+                sortable: true,
                 edittype: 'select',
                 editoptions: {
                     dataUrl: '',
@@ -256,7 +256,7 @@ function loadReward() {
                 index:'type',
                 width:150,
                 editable: true,
-                sortable: false,
+                sortable: true,
                 edittype: 'select',
                 editoptions: {
                     dataUrl: '',
@@ -281,7 +281,7 @@ function loadReward() {
                 index:'memberList',
                 width:150,
                 editable: true,
-                sortable: false,
+                sortable: true,
                 searchoptions: {
                     sopt: ['eq', 'ne','cn','nc']
                 },
@@ -294,7 +294,7 @@ function loadReward() {
                 index:'grants',
                 width:150,
                 editable: true,
-                sortable: false,
+                sortable: true,
                 searchoptions: {
                     sopt: ['eq', 'ne','cn','nc']
                 },
@@ -307,7 +307,7 @@ function loadReward() {
                 name:'createScientificEvidenceSrc',
                 index:'createScientificEvidenceSrc',
                 width:150,
-                editable: false,
+                editable: true,
                 formatter:function (cellvalue, options, row) {
                     var s=row.createScientificEvidenceSrc;
                     if(s!=null) {

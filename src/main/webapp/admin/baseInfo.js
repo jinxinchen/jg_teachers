@@ -64,7 +64,7 @@ function updateBaseInfo(){
         formData.set("email","");
     }
     if (!checkPhone()) {
-        formData.set("tel ","");
+        formData.set("tel","");
     }
     $.ajax({
         type:'post',

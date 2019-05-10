@@ -75,7 +75,7 @@ function loadAccount() {
               //账户密码
                 name:'password',
                 index:'password',
-                editable: true,
+                editable: false,
             },{
               //教师姓名
                 name:'name',

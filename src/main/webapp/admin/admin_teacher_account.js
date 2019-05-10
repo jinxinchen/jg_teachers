@@ -92,6 +92,7 @@ function  loadTeachers() {
                 width: 150,
                 editable: true,
                 sortable: true,
+                edittype: 'select',
                 searchoptions: {
                     sopt: ['eq'],
                     buildSelect: function (responseData) {
@@ -136,8 +137,18 @@ function  loadTeachers() {
                 width: 150,
                 editable: true,
                 sortable: true,
+                edittype: 'select',
                 searchoptions: {
-                    sopt: ['eq', 'ne','cn','nc']
+                    sopt: ['eq'],
+                    buildSelect: function (responseData) {
+                        var selectHtml = '<select><option></option>';
+                        selectHtml += '<option value="教学科研">' + "教学科研" + '</option>';
+                        selectHtml += '<option value="辅导员">' + "辅导员" + '</option>';
+                        selectHtml += '<option value="行政人员">' + "行政人员" + '</option>';
+                        selectHtml += '<option value="实验员">' + "实验员" + '</option>';
+                        selectHtml += '</select>';
+                        return selectHtml;
+                    }
                 },
                 searchrules: {
                     // required: true
@@ -190,11 +201,11 @@ function  loadTeachers() {
                 name: 'degree',
                 index: 'degree',
                 search: true,
-                width: 120,
+                width: 150,
                 editable: true,
                 sortable: true,
                 searchoptions: {
-                    sopt: ['eq', 'ne','cn','nc']
+                    sopt: ['eq', 'ne','cn','nc'],
                 },
                 searchrules: {
                     // required: true
@@ -204,11 +215,11 @@ function  loadTeachers() {
                 name: 'degreeType',
                 index: 'degreeType',
                 search: true,
-                width: 180,
+                width: 150,
                 editable: true,
                 sortable: true,
                 searchoptions: {
-                    sopt: ['eq', 'ne','cn','nc']
+                    sopt: ['eq', 'ne','cn','nc'],
                 },
                 searchrules: {
                     // required: true
@@ -221,8 +232,22 @@ function  loadTeachers() {
                 width: 150,
                 editable: true,
                 sortable: true,
+                edittype: 'select',
                 searchoptions: {
-                    sopt: ['eq', 'ne','cn','nc']
+                    sopt: ['eq'],
+                    buildSelect: function (responseData) {
+                        var selectHtml = '<select><option></option>';
+                        selectHtml += '<option value="教授">' + "教授" + '</option>';
+                        selectHtml += '<option value="副教授">' + "副教授" + '</option>';
+                        selectHtml += '<option value="讲师">' + "讲师" + '</option>';
+                        selectHtml += '<option value="研究员">' + "研究员" + '</option>';
+                        selectHtml += '<option value="副研究员">' + "副研究员" + '</option>';
+                        selectHtml += '<option value="助理研究员">' + "助理研究员" + '</option>';
+                        selectHtml += '<option value="实习研究员">' + "实习研究员" + '</option>';
+                        selectHtml += '<option value="无">' + "无" + '</option>';
+                        selectHtml += '</select>';
+                        return selectHtml;
+                    }
                 },
                 searchrules: {
                     // required: true
@@ -232,11 +257,30 @@ function  loadTeachers() {
                 name: 'educateDegreeLevel',
                 index: 'educateDegreeLevel',
                 search: true,
-                width: 180,
+                width: 150,
                 editable: true,
                 sortable: true,
+                edittype: 'select',
                 searchoptions: {
-                    sopt: ['eq', 'ne','cn','nc']
+                    sopt: ['eq'],
+                    buildSelect: function (responseData) {
+                        var selectHtml = '<select><option></option>';
+                        selectHtml += '<option value="一级">' + "一级" + '</option>';
+                        selectHtml += '<option value="二级">' + "二级" + '</option>';
+                        selectHtml += '<option value="三级">' + "三级" + '</option>';
+                        selectHtml += '<option value="四级">' + "四级" + '</option>';
+                        selectHtml += '<option value="五级">' + "五级" + '</option>';
+                        selectHtml += '<option value="六级">' + "六级" + '</option>';
+                        selectHtml += '<option value="七级">' + "七级" + '</option>';
+                        selectHtml += '<option value="八级">' + "八级" + '</option>';
+                        selectHtml += '<option value="九级">' + "九级" + '</option>';
+                        selectHtml += '<option value="十级">' + "十级" + '</option>';
+                        selectHtml += '<option value="十一级">' + "十一级" + '</option>';
+                        selectHtml += '<option value="十二级">' + "十二级" + '</option>';
+                        selectHtml += '<option value="无">' + "无" + '</option>';
+                        selectHtml += '</select>';
+                        return selectHtml;
+                    }
                 },
                 searchrules: {
                     // required: true
@@ -246,11 +290,19 @@ function  loadTeachers() {
                 name: 'isMentor',
                 index: 'isMentor',
                 search: true,
-                width: 200,
+                width: 150,
                 editable: true,
                 sortable: true,
+                edittype: 'select',
                 searchoptions: {
-                    sopt: ['eq', 'ne','cn','nc']
+                    sopt: ['eq'],
+                    buildSelect: function (responseData) {
+                        var selectHtml = '<select><option></option>';
+                        selectHtml += '<option value="是">' + "是" + '</option>';
+                        selectHtml += '<option value="否">' + "否" + '</option>';
+                        selectHtml += '</select>';
+                        return selectHtml;
+                    }
                 },
                 searchrules: {
                     // required: true
