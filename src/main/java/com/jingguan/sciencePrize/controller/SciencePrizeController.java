@@ -151,6 +151,7 @@ public class SciencePrizeController extends UploadImages {
         //封装成class
         TEducateScientificEntity record=new TEducateScientificEntity();
         record.setEducateScientificName(evidencePath);
+        record.setUserId(((Integer)request.getSession().getAttribute("user_id")));
         record.setStatus(status);
         record.setPrizeName(prizeName);
         record.setEducateScientificName(educateScientificName);
@@ -208,15 +209,19 @@ public class SciencePrizeController extends UploadImages {
         record.setCertifyNumber(certifyNumber);
 
         try{
-            int userid=-1;
+            Integer userid;
             if(name!=null||"".equals(name)){
                 UserDao userDao=new UserDao();
                 userid=userDao.findUserIdByTname(name);
             }else {
                 userid = (int) request.getSession().getAttribute("user_id");
             }
-            sciencePrizeService.saveRecord(userid,record);
-            wrapper.setSuccess(true);
+            if(userid ==null){
+                wrapper.setData("教师"+name+"不存在");
+            }else {
+                sciencePrizeService.saveRecord(userid,record);
+                wrapper.setSuccess(true);
+            }
         }catch (Exception ex){
             ex.printStackTrace();
         }

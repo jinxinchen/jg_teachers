@@ -1,6 +1,7 @@
 package com.jingguan.sciencePrizeCheck.service;
 
 import com.jingguan.common.vo.Page;
+import com.jingguan.sciencePrize.po.TEducateScientificEntity;
 import com.jingguan.sciencePrizeCheck.po.VTeachersPrizeCheckEntity;
 import jxl.write.WriteException;
 
@@ -16,7 +17,7 @@ public interface SciencePrizeCheckService {
 
     public Page<VTeachersPrizeCheckEntity> listRecordsByConditions(Page page);
 
-    public void updateRecord(String id, String status);
+    public void updateRecord(TEducateScientificEntity tEducateScientificEntity);
 
     public void getOutStream(ServletOutputStream os, Page.FilterModel condition)throws IOException,WriteException;
 

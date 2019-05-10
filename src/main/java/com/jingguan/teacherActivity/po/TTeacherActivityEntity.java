@@ -50,7 +50,7 @@ public class TTeacherActivityEntity {
     }
 
     @Basic
-    @Column(name = "user_id",updatable = false)
+    @Column(name = "user_id")
     public Integer getUserId() {
         return userId;
     }

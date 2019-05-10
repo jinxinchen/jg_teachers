@@ -8,6 +8,7 @@ import com.jingguan.admin.service.AdminAbilityProjectService;
 import com.jingguan.common.dao.impl.UserDao;
 import com.jingguan.common.tool.MergeTool;
 import com.jingguan.common.vo.Page;
+import com.jingguan.common.vo.ResponseWrapper;
 import com.jingguan.uploadExcel.controller.test2;
 import jxl.write.WriteException;
 import org.springframework.stereotype.Controller;
@@ -119,26 +120,39 @@ public class AdminAbilityProjectController extends test2 {
 
     @RequestMapping("editAbilityProject")
     @ResponseBody
-    int editAbilityProject(HttpServletRequest request,VAdminAbilityprojectEntity vAdminAbilityprojectEntity){
+    ResponseWrapper editAbilityProject(HttpServletRequest request, VAdminAbilityprojectEntity vAdminAbilityprojectEntity){
+        ResponseWrapper<String> responseWrapper = new ResponseWrapper<>();
+        responseWrapper.setSuccess(false);
         UserDao userDao=new UserDao();
-
         Integer user_id=userDao.findUserIdByTname(vAdminAbilityprojectEntity.getName());
-        if(user_id == null){return 505;}
+        if(user_id == null){
+            responseWrapper.setData("教师"+vAdminAbilityprojectEntity.getName()+"不存在");
+            return responseWrapper;
+        }
         vAdminAbilityprojectEntity.setUserId(user_id);
         TAbilityProjectEntity tAbilityProjectEntity=new TAbilityProjectEntity();
 
         MergeTool.mergeObject(vAdminAbilityprojectEntity,tAbilityProjectEntity);
 
-        return abilityProjectService.editAbilityProject(user_id,tAbilityProjectEntity);
+        if(abilityProjectService.editAbilityProject(user_id,tAbilityProjectEntity) == 200){
+            responseWrapper.setSuccess(true);
+        }else {
+            responseWrapper.setData("服务器内部错误，更新失败");
+        }
+        return responseWrapper;
     }
 
     @RequestMapping("addAbilityProject")
     @ResponseBody
-    int addAbilityProject(HttpServletRequest request,VAdminAbilityprojectEntity vAdminAbilityprojectEntity){
+    ResponseWrapper addAbilityProject(HttpServletRequest request,VAdminAbilityprojectEntity vAdminAbilityprojectEntity){
+        ResponseWrapper<String> responseWrapper = new ResponseWrapper<>();
+        responseWrapper.setSuccess(false);
         UserDao userDao=new UserDao();
-
-        int user_id=userDao.findUserIdByTname(vAdminAbilityprojectEntity.getName());
-
+        Integer user_id=userDao.findUserIdByTname(vAdminAbilityprojectEntity.getName());
+        if(user_id == null){
+            responseWrapper.setData("教师"+vAdminAbilityprojectEntity.getName()+"不存在");
+            return responseWrapper;
+        }
        // name: 1
 
         TAbilityProjectEntity tAbilityProjectEntity=new TAbilityProjectEntity();
@@ -159,7 +173,12 @@ public class AdminAbilityProjectController extends test2 {
        // notice: 11
         tAbilityProjectEntity.setNotice(vAdminAbilityprojectEntity.getNotice());
 
-        return abilityProjectService.addAbilityProject(user_id,tAbilityProjectEntity);
+        if(abilityProjectService.addAbilityProject(user_id,tAbilityProjectEntity)==200){
+            responseWrapper.setSuccess(true);
+        }else {
+            responseWrapper.setData("服务器内部错误，更新失败");
+        }
+        return responseWrapper;
     }
 
 }

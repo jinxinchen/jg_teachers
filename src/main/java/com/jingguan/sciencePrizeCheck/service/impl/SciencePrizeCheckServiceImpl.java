@@ -2,6 +2,7 @@ package com.jingguan.sciencePrizeCheck.service.impl;
 
 import com.jingguan.common.dao.impl.UserDao;
 import com.jingguan.common.vo.Page;
+import com.jingguan.sciencePrize.po.TEducateScientificEntity;
 import com.jingguan.sciencePrize.service.SciencePrizeService;
 import com.jingguan.sciencePrizeCheck.dao.TChangeStatusDao;
 import com.jingguan.sciencePrizeCheck.dao.VTeachersPrizeCheckEntityDao;
@@ -68,8 +69,8 @@ public class SciencePrizeCheckServiceImpl extends UserDao implements SciencePriz
     }
 
     @Override
-    public void updateRecord(String id, String status) {
-            vTeachersPrizeCheckEntityDao.update(Integer.valueOf(id.trim()),status);
+    public void updateRecord(TEducateScientificEntity tEducateScientificEntity) {
+            vTeachersPrizeCheckEntityDao.update(tEducateScientificEntity);
     }
 
     @Override

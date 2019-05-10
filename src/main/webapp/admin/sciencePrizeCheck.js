@@ -220,9 +220,9 @@ function loadActivity(){
                     dataInit: function (element) {
                         $(element).attr("readonly", "readonly");
                         $(element).on("click", function () {
-                            laydate({istime: false, format: 'YYYY-MM-DD', choose: function(dates){ //选择好日期的回调
-                                    $(element).trigger("change");
-                                }})
+                            laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss', choose: function(dates){ //选择好日期的回调
+                                $(element).trigger("change");
+                            }})
                         })
                     }
                 }

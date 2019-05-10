@@ -1,9 +1,13 @@
 package com.jingguan.sciencePrizeCheck.controller;
 
+import com.jingguan.common.dao.impl.UserDao;
+import com.jingguan.common.tool.MergeTool;
 import com.jingguan.common.vo.Page;
 import com.jingguan.common.vo.ResponseWrapper;
+import com.jingguan.sciencePrize.po.TEducateScientificEntity;
 import com.jingguan.sciencePrizeCheck.po.VTeachersPrizeCheckEntity;
 import com.jingguan.sciencePrizeCheck.service.SciencePrizeCheckService;
+
 import com.jingguan.uploadExcel.controller.test2;
 import jxl.write.WriteException;
 import org.springframework.stereotype.Controller;
@@ -54,14 +58,24 @@ public class SciencePrizeCheckController extends test2 {
 
     @RequestMapping(value="updatePrizeRecord")
     @ResponseBody
-    public ResponseWrapper updateRecord(HttpServletRequest request, String id, String status){
-        ResponseWrapper wrapper=new ResponseWrapper();
+    public ResponseWrapper updateRecord(HttpServletRequest request, VTeachersPrizeCheckEntity vTeachersPrizeCheckEntity){
+        ResponseWrapper<String> wrapper=new ResponseWrapper<>();
         wrapper.setSuccess(false);
+        //检查教师是不是存在
+        UserDao userDao = new UserDao();
+        Integer userId = userDao.findUserIdByTname(vTeachersPrizeCheckEntity.getName());
+        if(userId == null){
+            wrapper.setData("教师"+vTeachersPrizeCheckEntity.getName()+"不存在");
+            return wrapper;
+        }
+        TEducateScientificEntity tEducateScientificEntity = new TEducateScientificEntity();
+        MergeTool.mergeObject(vTeachersPrizeCheckEntity,tEducateScientificEntity);
         try {
-            sciencePrizeCheckService.updateRecord(id,status);
+            sciencePrizeCheckService.updateRecord(tEducateScientificEntity);
             wrapper.setSuccess(true);
         }catch (Exception ex){
-
+            ex.printStackTrace();
+            wrapper.setData("服务器内部错误更新失败");
         }
 
         return wrapper;
