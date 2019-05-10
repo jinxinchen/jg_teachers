@@ -37,7 +37,7 @@ public class UserDao extends BaseDao{
         List<TTeacherBaseinfoEntity> res = session.createCriteria(TTeacherBaseinfoEntity.class).add(Restrictions.eq("name",teacherName)).list();
         transaction.commit();
         if(res.size() == 0){
-            return  0;
+            return  null;
         }else{
             return res.get(0).getUserId();
         }

@@ -123,7 +123,7 @@ public class ActivityController extends UploadImages {
                                       String activityOrganizers, String others){
         ResponseWrapper wrapper=new ResponseWrapper();
         wrapper.setSuccess(false);
-
+        System.out.println(teacherName);
         //封装一下
         TTeacherActivityEntity record=new TTeacherActivityEntity();
         record.setActivityName(activityName);
