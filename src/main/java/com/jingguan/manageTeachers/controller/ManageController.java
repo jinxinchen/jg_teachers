@@ -194,7 +194,9 @@ public class ManageController extends uploadImage {
 
     Page<TUsersEntity> loadRecord(HttpServletRequest request,Page<TUsersEntity> page){
         request.getSession().setAttribute("teachersAccountCondition",page.getFilterModel());//为了下载做准备
-        return manageService.loadRecord(page);
+        manageService.loadRecord(page);
+        System.out.println(page);
+        return page;
     }
 
     @RequestMapping(value = "upload", method = RequestMethod.POST)

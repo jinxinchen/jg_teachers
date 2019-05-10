@@ -13,7 +13,6 @@ import java.util.List;
 public class Page<T> {
     public static final String ASC = "ASC";
     public static final String DESC = "DESC";
-
     private int page;  //要取的页码
     private int limit;  //每页容量
 
@@ -354,6 +353,24 @@ public class Page<T> {
         this.searchOper = null;
     }
 
+    @Override
+    public String toString() {
+        return "Page{" +
+                "page=" + page +
+                ", limit=" + limit +
+                ", filters='" + filters + '\'' +
+                ", filterModel=" + filterModel +
+                ", sidx='" + sidx + '\'' +
+                ", sord='" + sord + '\'' +
+                ", sortPairModule=" + sortPairModule +
+                ", searchField='" + searchField + '\'' +
+                ", searchString=" + searchString +
+                ", searchOper='" + searchOper + '\'' +
+                ", pages=" + pages +
+                ", recores=" + recores +
+                ", result=" + result +
+                '}';
+    }
 }
 
 

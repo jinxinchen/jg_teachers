@@ -16,6 +16,20 @@ public class VTeachersAccountsEntity {
     private Integer id;
     private Integer userId;
 
+
+    @Override
+    public String toString() {
+        return "VTeachersAccountsEntity{" +
+                "account='" + account + '\'' +
+                ", password='" + password + '\'' +
+                ", name='" + name + '\'' +
+                ", createTime='" + createTime + '\'' +
+                ", roleId=" + roleId +
+                ", id=" + id +
+                ", userId=" + userId +
+                '}';
+    }
+
     @Basic
     @Column(name="name")
     public String getName() {
