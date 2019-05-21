@@ -29,6 +29,8 @@ function login(){
                         alert("账号密码错误");
                     }else if(data == "timesLimit"){
                         alert("密码错误次数太多，请等会再试")
+                    }else if(data == "isxuegong"){
+                        alert("学工账号请在学工页面登陆")
                     }
                     location.href="login.html";
                 }

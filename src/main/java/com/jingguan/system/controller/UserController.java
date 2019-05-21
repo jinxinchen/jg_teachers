@@ -95,10 +95,21 @@ public class UserController {
             TUsersEntity res = userService.login(account);
             if(res == null){
                 meassage = "noAccount";
-            } else if(!password.equals(res.getPassword())){
-                meassage = "passwordWorry";
-                httpSession.setAttribute("loginTimes",++times);
-            }
+            } else {//账号不是null 查角色
+                if(!password.equals(res.getPassword())){
+                    meassage = "passwordWorry";
+                    httpSession.setAttribute("loginTimes",++times);
+                }else {
+                    //表明密码是正确的,看看角色是不是有学工角色
+                    List<TUsersRoleEntity> tUsersRoleEntity = userService.selectRoleByUser(res);
+                    for (TUsersRoleEntity item:tUsersRoleEntity){
+                        if(item.getRoleId() == 6){
+                            //表示没有权限
+                            meassage = "isxuegong";
+                            break;
+                        }
+                    }
+                }}
             if("success".equals(meassage)){
                 request.getSession().setAttribute("user_id",res.getId());
                 httpSession.setAttribute("loginTimes",1);
