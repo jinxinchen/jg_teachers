@@ -2,10 +2,12 @@ package com.jingguan.system.service.impl;
 
 import com.jingguan.system.dao.UserDao;
 import com.jingguan.system.po.TUsersEntity;
+import com.jingguan.system.po.TUsersRoleEntity;
 import com.jingguan.system.service.UserService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * Created by 陈 on 2017/10/8.
@@ -22,12 +24,10 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public int XgLogin(String account, String password) {
-        int res = userDao.findXgByAccount(account,password);
-        if(res != 0){
-            return res;
-        }else{
-            return 0;
+    public List<TUsersRoleEntity> selectRoleByUser(TUsersEntity tUsersEntity) {
+        if(tUsersEntity == null){return  null;}
+        else {
+            return userDao.selectRoleByUser(tUsersEntity);
         }
     }
 }

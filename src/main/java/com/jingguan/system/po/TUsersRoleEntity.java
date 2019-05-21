@@ -76,4 +76,14 @@ public class TUsersRoleEntity {
         result = 31 * result + (status != null ? status.hashCode() : 0);
         return result;
     }
+
+    @Override
+    public String toString() {
+        return "TUsersRoleEntity{" +
+                "id=" + id +
+                ", roleId=" + roleId +
+                ", userId=" + userId +
+                ", status=" + status +
+                '}';
+    }
 }
