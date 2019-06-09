@@ -26,6 +26,16 @@ public class VAdminArticleEntity {
     private String periods;
     private String nums;
     private String type;
+    private String articleIndex;
+    @Basic
+    @Column(name = "article_index")
+    public String getArticleIndex() {
+        return articleIndex;
+    }
+
+    public void setArticleIndex(String articleIndex) {
+        this.articleIndex = articleIndex;
+    }
 
     @Id
     @Column(name = "id")

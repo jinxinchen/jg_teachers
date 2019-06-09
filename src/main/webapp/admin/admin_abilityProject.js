@@ -67,17 +67,38 @@ function loadAbilityProject(){
                 }
             },
             {
+
                 name: 'prizeLevel',
                 index: 'prizeLevel',
-                search: true,
+                search:true,
+                width: 120,
                 editable: true,
-                width: 150,
-                sortable: true,
-                searchoptions: {
-                    sopt: ['eq', 'ne','cn','nc']
+                edittype: 'select',
+                editoptions:{
+                    dataUrl: '',
+                    buildSelect:function(responseData){
+                        var selectHtml = '<select><option></option>';
+                        selectHtml += '<option value="国家级">' + "国家级" + '</option>';
+                        selectHtml += '<option value="省部级">' + "省部级" + '</option>';
+                        selectHtml += '<option value="市厅级">' + "市厅级" + '</option>';
+                        selectHtml += '<option value="校级">' + "校级" + '</option>';
+                        selectHtml += '</select>';
+                        return selectHtml;
+                    }
                 },
-                searchrules: {
-                    // required: true
+                stype: 'select',
+                searchoptions: {
+                    sopt: ['eq', 'ne'],
+                    dataUrl: '',
+                    buildSelect:function(responseData){
+                        var selectHtml = '<select><option></option>';
+                        selectHtml += '<option value="国家级">' + "国家级" + '</option>';
+                        selectHtml += '<option value="省部级">' + "省部级" + '</option>';
+                        selectHtml += '<option value="市厅级">' + "市厅级" + '</option>';
+                        selectHtml += '<option value="校级">' + "校级" + '</option>';
+                        selectHtml += '</select>';
+                        return selectHtml;
+                    }
                 }
             },
             {

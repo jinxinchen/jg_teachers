@@ -504,13 +504,27 @@ function loadWorkExp() {
             {
                 name: 'startTime',
                 index: 'startTime',
-                width: 90,
-                stype: 'integer',
-                editable: true,
-                search: true,
-                sortable: true,
+                editable:true,width:200,sorttype:"date",formatter:"date",
+                editoptions: {
+                    dataInit: function (element) {
+                        $(element).attr("readonly", "readonly");
+                        $(element).on("click", function () {
+                            laydate({istime: false, format: 'YYYY-MM-DD', choose: function(dates){ //选择好日期的回调
+                                    $(element).trigger("change");
+                                }})
+                        })
+                    }
+                },
                 searchoptions: {
-                    sopt: ['eq', 'ne', 'lt', 'le', 'gt']
+                    sopt: ['eq', 'ne', 'lt', 'le', 'gt'],
+                    dataInit: function (element) {
+                        $(element).attr("readonly", "readonly");
+                        $(element).on("click", function () {
+                            laydate({istime: false, format: 'YYYY-MM-DD', choose: function(dates){ //选择好日期的回调
+                                    $(element).trigger("change");
+                                }})
+                        })
+                    }
                 },
                 searchrules: {
                     required: true,
@@ -519,13 +533,27 @@ function loadWorkExp() {
             {
                 name: 'endTime',
                 index: 'endTime',
-                width: 90,
-                stype: 'integer',
-                editable: true,
-                search: true,
-                sortable: true,
+                editable:true,width:200,sorttype:"date",formatter:"date",
+                editoptions: {
+                    dataInit: function (element) {
+                        $(element).attr("readonly", "readonly");
+                        $(element).on("click", function () {
+                            laydate({istime: false, format: 'YYYY-MM-DD', choose: function(dates){ //选择好日期的回调
+                                    $(element).trigger("change");
+                                }})
+                        })
+                    }
+                },
                 searchoptions: {
-                    sopt: ['eq', 'ne', 'lt', 'le', 'gt']
+                    sopt: ['eq', 'ne', 'lt', 'le', 'gt'],
+                    dataInit: function (element) {
+                        $(element).attr("readonly", "readonly");
+                        $(element).on("click", function () {
+                            laydate({istime: false, format: 'YYYY-MM-DD', choose: function(dates){ //选择好日期的回调
+                                    $(element).trigger("change");
+                                }})
+                        })
+                    }
                 },
                 searchrules: {
                     required: true,

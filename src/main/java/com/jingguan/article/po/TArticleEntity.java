@@ -26,6 +26,16 @@ public class TArticleEntity {
     private String periods;
     private String uploadTime;
     private String fileName;
+    private String articleIndex;
+    @Basic
+    @Column(name = "article_index")
+    public String getArticleIndex() {
+        return articleIndex;
+    }
+
+    public void setArticleIndex(String articleIndex) {
+        this.articleIndex = articleIndex;
+    }
 
     @Override
     public String toString() {

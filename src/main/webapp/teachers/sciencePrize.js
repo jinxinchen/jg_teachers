@@ -38,7 +38,7 @@ function loadReward() {
             '获奖类别',
             '获奖日期',
             '授予单位',
-            '学校署名排序',
+            '获奖单位',
             '作者署名排序',
             '成员名单',
             '证明上传',
@@ -111,9 +111,18 @@ function loadReward() {
                         return selectHtml;
                     }
                 },
+                stype: 'select',
                 searchoptions: {
-                    sopt: ['eq', 'ne']
-                }
+                    sopt: ['eq', 'ne','cn','nc'],
+                    dataUrl: '',
+                    buildSelect: function (responseData) {
+                        var selectHtml = '<select><option></option>';
+                        selectHtml += '<option value="科研">' + "科研" + '</option>';
+                        selectHtml += '<option value="教学">' + "教学" + '</option>';
+                        selectHtml += '</select>';
+                        return selectHtml;
+                    }
+                },
             },
             {
                 name:'prizeTime',

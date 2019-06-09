@@ -104,13 +104,31 @@ function loadActivity(){
                 index:'activityName',
                 width:150,
                 editable: true,
-                sortable: false,
-                searchoptions: {
-                    sopt: ['eq', 'ne','cn','nc']
+                edittype: 'select',
+                editoptions: {
+                    dataUrl: '',
+                    buildSelect: function (responseData) {
+                        var selectHtml = '<select><option></option>';
+                        selectHtml += '<option value="访学">' + "访学" + '</option>';
+                        selectHtml += '<option value="培训">' + "培训" + '</option>';
+                        selectHtml += '<option value="参加学术会议">' + "参加学术会议" + '</option>';
+                        selectHtml += '</select>';
+                        return selectHtml;
+                    }
                 },
-                searchrules: {
-                    // required: true
-                }
+                stype: 'select',
+                searchoptions: {
+                    sopt: ['eq', 'ne','cn','nc'],
+                    dataUrl: '',
+                    buildSelect: function (responseData) {
+                        var selectHtml = '<select><option></option>';
+                        selectHtml += '<option value="访学">' + "访学" + '</option>';
+                        selectHtml += '<option value="培训">' + "培训" + '</option>';
+                        selectHtml += '<option value="参加学术会议">' + "参加学术会议" + '</option>';
+                        selectHtml += '</select>';
+                        return selectHtml;
+                    }
+                },
             },
             {
                 name:'activityLocation',

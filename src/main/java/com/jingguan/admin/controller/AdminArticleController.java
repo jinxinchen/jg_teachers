@@ -251,6 +251,7 @@ public class AdminArticleController extends test2{
         tArticleEntity.setIsCall(vAdminArticleEntity.getIsCall());
 
         tArticleEntity.setNotice(vAdminArticleEntity.getNotice());
+        tArticleEntity.setArticleIndex(vAdminArticleEntity.getArticleIndex());
         int res = articleService.editArticle(user_id,tArticleEntity);
         if(res == 200){
             responseWrapper.setSuccess(true);
@@ -295,7 +296,7 @@ public class AdminArticleController extends test2{
         tArticleEntity.setLevel(vAdminArticleEntity.getLevel());
 
         tArticleEntity.setIsCall(vAdminArticleEntity.getIsCall());
-
+        tArticleEntity.setArticleIndex(vAdminArticleEntity.getArticleIndex());
         tArticleEntity.setNotice(vAdminArticleEntity.getNotice());
         int res=articleService.addArticle(user_id,tArticleEntity);
         if(res == 200){

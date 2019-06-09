@@ -80,7 +80,7 @@ function loadActivity(){
             '获奖类别',
             '获奖日期',
             '授奖单位',
-            '学校署名',
+            '获奖单位',
             '作者署名',
             '成员名单',
             '证明',
@@ -191,8 +191,17 @@ function loadActivity(){
                         return selectHtml;
                     }
                 },
+                stype: 'select',
                 searchoptions: {
-                    sopt: ['eq', 'ne','cn','nc']
+                    sopt: ['eq', 'ne','cn','nc'],
+                    dataUrl: '',
+                    buildSelect: function (responseData) {
+                        var selectHtml = '<select><option></option>';
+                        selectHtml += '<option value="科研">' + "科研" + '</option>';
+                        selectHtml += '<option value="教学">' + "教学" + '</option>';
+                        selectHtml += '</select>';
+                        return selectHtml;
+                    }
                 },
                 searchrules: {
                     // required: true

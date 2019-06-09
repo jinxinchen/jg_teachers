@@ -19,7 +19,7 @@ function loadArticle(){
         multiSort:true,
         rowNum: 5,
         rowList: [5, 10, 15],
-        colNames: ['类型','论文名称', '发表时间', '刊物名称', '刊物级别', '刊物刊号','页码','期数','作者排名（1为第一作者）','是否为通讯作者','备注','附件上传','附件下载','上传时间','操作'],
+        colNames: ['类型','论文名称', '发表时间', '刊物名称', '刊物级别', '刊物刊号','页码','期数','作者排名（1为第一作者）','是否为通讯作者','备注','索引','附件上传','附件下载','上传时间','操作'],
         colModel: [
             {
                 name:'type',
@@ -28,27 +28,33 @@ function loadArticle(){
                 width: 100,
                 editable: true,
                 edittype: 'select',
-                editoptions:{
+                editoptions: {
                     dataUrl: '',
-                    buildSelect:function(responseData){
+                    buildSelect: function (responseData) {
                         var selectHtml = '<select><option></option>';
                         selectHtml += '<option value="科研">' + "科研" + '</option>';
-                        selectHtml += '<option value="教学">' + "教学" + '</option>';
+                        selectHtml += '<option value="教改">' + "教改" + '</option>';
+                        selectHtml += '<option value="其他">' + "其他" + '</option>';
                         selectHtml += '</select>';
                         return selectHtml;
                     }
                 },
+                sortable: true,
                 stype: 'select',
                 searchoptions: {
-                    sopt: ['eq', 'ne'],
+                    sopt: ['eq', 'ne','cn','nc'],
                     dataUrl: '',
-                    buildSelect:function(responseData){
+                    buildSelect: function (responseData) {
                         var selectHtml = '<select><option></option>';
                         selectHtml += '<option value="科研">' + "科研" + '</option>';
-                        selectHtml += '<option value="教学">' + "教学" + '</option>';
+                        selectHtml += '<option value="教改">' + "教改" + '</option>';
+                        selectHtml += '<option value="其他">' + "其他" + '</option>';
                         selectHtml += '</select>';
                         return selectHtml;
                     }
+                },
+                searchrules: {
+                    // required: true
                 }
             },
             {
@@ -103,16 +109,37 @@ function loadArticle(){
                 name: 'publicationLevel',
                 index: 'publicationLevel',
                 width: 90,
-                // stype: 'integer',
-                editable: true,
+                edittype: 'select',
+                editoptions: {
+                    dataUrl: '',
+                    buildSelect: function (responseData) {
+                        var selectHtml = '<select><option></option>';
+                        selectHtml += '<option value="一类A">' + "一类A" + '</option>';
+                        selectHtml += '<option value="一类B">' + "一类B" + '</option>';
+                        selectHtml += '<option value="二类A">' + "二类A" + '</option>';
+                        selectHtml += '<option value="二类B">' + "二类B" + '</option>';
+                        selectHtml += '</select>';
+                        return selectHtml;
+                    }
+                },
                 search: true,
                 sortable: true,
+                stype: 'select',
                 searchoptions: {
-                    sopt: ['eq', 'ne', 'lt', 'le', 'gt']
+                    sopt: ['eq', 'ne','cn','nc'],
+                    dataUrl: '',
+                    buildSelect: function (responseData) {
+                        var selectHtml = '<select><option></option>';
+                        selectHtml += '<option value="一类A">' + "一类A" + '</option>';
+                        selectHtml += '<option value="一类B">' + "一类B" + '</option>';
+                        selectHtml += '<option value="二类A">' + "二类A" + '</option>';
+                        selectHtml += '<option value="二类B">' + "二类B" + '</option>';
+                        selectHtml += '</select>';
+                        return selectHtml;
+                    }
                 },
                 searchrules: {
-                    required: true,
-                    // integer: true
+                    // required: true
                 }
             },
             {
@@ -197,8 +224,17 @@ function loadArticle(){
                 },
                 search: true,
                 sortable: true,
+                stype: 'select',
                 searchoptions: {
-                    sopt: ['eq', 'ne','cn','nc']
+                    sopt: ['eq', 'ne'],
+                    dataUrl: '',
+                    buildSelect:function(responseData){
+                        var selectHtml = '<select><option></option>';
+                        selectHtml += '<option value="是">' + "是" + '</option>';
+                        selectHtml += '<option value="否">' + "否" + '</option>';
+                        selectHtml += '</select>';
+                        return selectHtml;
+                    }
                 },
                 searchrules: {
                     // required: true
@@ -218,6 +254,46 @@ function loadArticle(){
                 searchrules: {
                     required: true,
                     // integer: true
+                }
+            }, {
+                name: 'articleIndex',
+                index: 'articleIndex',
+                width: 120,
+                // stype: 'integer',
+                editable: true,
+                edittype: 'select',
+                editoptions: {
+                    dataUrl: '',
+                    buildSelect: function (responseData) {
+                        var selectHtml = '<select><option></option>';
+                        selectHtml += '<option value="cssci">' + "cssci" + '</option>';
+                        selectHtml += '<option value="ssci">' + "ssci" + '</option>';
+                        selectHtml += '<option value="sci">' + "sci" + '</option>';
+                        selectHtml += '<option value="ei">' + "ei" + '</option>';
+                        selectHtml += '<option value="其他">' + "其他" + '</option>';
+                        selectHtml += '</select>';
+                        return selectHtml;
+                    }
+                },
+                search: true,
+                sortable: true,
+                stype: 'select',
+                searchoptions: {
+                    sopt: ['eq', 'ne'],
+                    dataUrl: '',
+                    buildSelect:function(responseData){
+                        var selectHtml = '<select><option></option>';
+                        selectHtml += '<option value="cssci">' + "cssci" + '</option>';
+                        selectHtml += '<option value="ssci">' + "ssci" + '</option>';
+                        selectHtml += '<option value="sci">' + "sci" + '</option>';
+                        selectHtml += '<option value="ei">' + "ei" + '</option>';
+                        selectHtml += '<option value="其他">' + "其他" + '</option>';
+                        selectHtml += '</select>';
+                        return selectHtml;
+                    }
+                },
+                searchrules: {
+                    // required: true
                 }
             },
             {
@@ -476,6 +552,33 @@ function loadCopyRight(){
                 width: 150,
                 sortable: true,
                 editable: true,
+                edittype: 'select',
+                editoptions: {
+                    dataUrl: '',
+                    buildSelect: function (responseData) {
+                        var selectHtml = '<select><option></option>';
+                        selectHtml += '<option value="专著">' + "专著" + '</option>';
+                        selectHtml += '<option value="教材">' + "教材" + '</option>';
+                        selectHtml += '<option value="译著">' + "译著" + '</option>';
+                        selectHtml += '<option value="其他">' + "其他" + '</option>';
+                        selectHtml += '</select>';
+                        return selectHtml;
+                    }
+                },
+                stype: 'select',
+                searchoptions: {
+                    sopt: ['eq', 'ne','cn','nc'],
+                    dataUrl: '',
+                    buildSelect: function (responseData) {
+                        var selectHtml = '<select><option></option>';
+                        selectHtml += '<option value="专著">' + "专著" + '</option>';
+                        selectHtml += '<option value="教材">' + "教材" + '</option>';
+                        selectHtml += '<option value="译著">' + "译著" + '</option>';
+                        selectHtml += '<option value="其他">' + "其他" + '</option>';
+                        selectHtml += '</select>';
+                        return selectHtml;
+                    }
+                },
             },
             {
                 name: 'publishName',

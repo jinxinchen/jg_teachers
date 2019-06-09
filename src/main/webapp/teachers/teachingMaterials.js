@@ -120,9 +120,22 @@ function loadMaterials(){
                         return selectHtml;
                     }
                 },
+                stype: 'select',
                 searchoptions: {
-                    sopt: ['eq', 'ne']
-                }
+                    sopt: ['eq', 'ne','cn','nc'],
+                    dataUrl: '',
+                    buildSelect: function (responseData) {
+                        var selectHtml = '<select><option></option>';
+                        var val="";
+                        for( i=2018;i<2050;i++){
+                            val=i+"年上学期";
+                            selectHtml += '<option value='+val+'>' + val + '</option>';
+                            val=i+"年下学期";
+                            selectHtml += '<option value='+val+'>' + val + '</option>';
+                        }
+                        return selectHtml;
+                    }
+                },
             },{
                 name:'type',
                 index:'type',
@@ -146,9 +159,22 @@ function loadMaterials(){
                         return selectHtml;
                     }
                 },
+                stype: 'select',
                 searchoptions: {
-                    sopt: ['eq', 'ne']
-                }
+                    sopt: ['eq', 'ne','cn','nc'],
+                    dataUrl: '',
+                    buildSelect: function (responseData) {
+                        var selectHtml = '<select><option></option>';
+                        selectHtml += '<option value="大纲">' + "大纲" + '</option>';
+                        selectHtml += '<option value="进度表">' + "进度表" + '</option>';
+                        selectHtml += '<option value="幻灯片">' + "幻灯片" + '</option>';
+                        selectHtml += '<option value="点名单">' + "点名单" + '</option>';
+                        selectHtml += '<option value="教案">' + "教案" + '</option>';
+                        selectHtml += '<option value="其他">' + "其他" + '</option>';
+
+                        return selectHtml;
+                    }
+                },
             },
             {
                 width: 120,

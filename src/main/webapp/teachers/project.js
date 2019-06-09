@@ -150,9 +150,21 @@ function loadReward() {
                         return selectHtml;
                     }
                 },
+                stype: 'select',
                 searchoptions: {
-                    sopt: ['eq', 'ne']
-                }
+                    sopt: ['eq', 'ne','cn','nc'],
+                    dataUrl: '',
+                    buildSelect: function (responseData) {
+                        var selectHtml = '<select><option></option>';
+                        selectHtml += '<option value="国家级">' + "国家级" + '</option>';
+                        selectHtml += '<option value="省部级">' + "省部级" + '</option>';
+                        selectHtml += '<option value="地厅级">' + "地厅级" + '</option>';
+                        selectHtml += '<option value="校级">' + "校级" + '</option>';
+                        selectHtml += '<option value="横向">' + "横向" + '</option>';
+                        selectHtml += '</select>';
+                        return selectHtml;
+                    }
+                },
             },
             {
                 name:'createTime',
@@ -224,9 +236,18 @@ function loadReward() {
                         return selectHtml;
                     }
                 },
+                stype: 'select',
                 searchoptions: {
-                    sopt: ['eq', 'ne']
-                }
+                    sopt: ['eq', 'ne','cn','nc'],
+                    dataUrl: '',
+                    buildSelect: function (responseData) {
+                        var selectHtml = '<select><option></option>';
+                        selectHtml += '<option value="是">' + "是" + '</option>';
+                        selectHtml += '<option value="否">' + "否" + '</option>';
+                        selectHtml += '</select>';
+                        return selectHtml;
+                    }
+                },
             },
 
             {
@@ -246,9 +267,18 @@ function loadReward() {
                         return selectHtml;
                     }
                 },
+                stype: 'select',
                 searchoptions: {
-                    sopt: ['eq', 'ne']
-                }
+                    sopt: ['eq', 'ne','cn','nc'],
+                    dataUrl: '',
+                    buildSelect: function (responseData) {
+                        var selectHtml = '<select><option></option>';
+                        selectHtml += '<option value="科研项目">' + "科研项目" + '</option>';
+                        selectHtml += '<option value="教学项目">' + "教学项目" + '</option>';
+                        selectHtml += '</select>';
+                        return selectHtml;
+                    }
+                },
             },
 
             {
